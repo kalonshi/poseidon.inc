@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface CurvePointRepository extends JpaRepository<CurvePoint, Integer> {
+public CurvePoint findByCurveId(Integer id);
+
 
 }

@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -18,6 +20,7 @@ public class User {
     @NotBlank(message = "Role is mandatory")
     private String role;
 
+    
     public Integer getId() {
         return id;
     }
@@ -57,4 +60,6 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+  
+  
 }
