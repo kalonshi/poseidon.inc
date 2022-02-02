@@ -22,15 +22,6 @@
 			 -->
 
 				<div class="form-group">
-					<label for="id" class="col-sm-2 control-label"> ID</label>
-					<div class="col-sm-10">
-						<input type="text" th:field="*{id}" id="id" placeholder="id"
-							class="col-4">
-						<p class="text-danger" th:if="${#fields.hasErrors('id')}"
-							th:errors="*{id}"></p>
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="name" class="col-sm-2 control-label">name</label>
 					<div class="col-sm-10">
 						<input type="text" th:field="*{name}" id="name" placeholder="name"
@@ -86,7 +77,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<a class="btn btn-danger btn-sm" href="/ruleName/add">Cancel</a> <input
+						<a class="btn btn-danger btn-sm" href="/ruleName/list">Cancel</a> <input
 							class="btn btn-primary btn-sm" type="submit" value="Add Rule">
 					</div>
 				</div>
