@@ -20,7 +20,7 @@ public class Rating {
 	private String sandPRating;
 	@Column(length = 125)
 	private String fitchRating;
-	/* @Size(min = 1,max=6) */
+	/* @Min( value= 1)*/
 	private Integer orderNumber;
 
 	

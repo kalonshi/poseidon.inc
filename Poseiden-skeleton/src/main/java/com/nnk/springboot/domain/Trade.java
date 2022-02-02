@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -13,21 +14,27 @@ public class Trade {
     // TODO: Map columns in data table TRADE with corresponding java fields
 	 @Id
 	    @GeneratedValue(strategy= GenerationType.AUTO)
-	private Integer tradeId;
+	 @Column(name="TradeId")
+	 private Integer tradeId;
 	 @Column(length = 30, nullable = false) 
 	private String account;
 	 @Column(length = 30, nullable = false) 
 	 private String type;
-	/* @Size(min = 1,max=5) */
+	/* @Min( value= 1) */
+	 @Column(name="buyQuantity")
 	private Double buyQuantity;
-	/* @Size(min = 1) */
+	/* @Min( value= 1) */
+	 @Column(name="sellQuantity")
 	private Double sellQuantity;
-	/* @Size(min = 1) */
+	/* @Min( value= 1) */
+	 @Column(name="buyPrice" )
 	private Double buyPrice;
-	/* @Size(min = 1) */
+	/* @Min( value= 1) */
+	 @Column(name="sellPrice")
 	private Double sellPrice;
 	 
 	private String benchmark;
+	@Column(name="tradeDate")
 	private Timestamp tradeDate;
 	@Column(length = 125) 
 	private String security;
@@ -37,18 +44,19 @@ public class Trade {
 	private String trader;
 	@Column(length = 125) 
 	private String book;
-	@Column(length = 125) 
+	@Column(name="creationName", length = 125) 
 	private String creationName;
-	
+	@Column(name="creationDate")
 	Timestamp creationDate;
-	@Column(length = 125) 
+	@Column(name="revisionName", length = 125)  
 	private String revisionName;
+	@Column(name="revisionDate", length = 125) 
 	Timestamp revisionDate;
-	@Column(length = 125) 
+	@Column(name="dealName", length = 125)  
 	private String dealName;
-	@Column(length = 125) 
+	@Column(name="dealType", length = 125) 
 	private String dealType;
-	@Column(length = 125) 
+	@Column(name="sourceListId", length = 125) 
 	private String sourceListId;
 	@Column(length = 125) 
 	private String side;

@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -15,14 +16,14 @@ public class CurvePoint {
 	 @Id
 	    @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
-	 
-	 @NotNull(message = "CurveId is mandatory")
+	 @Min(value = 1,message = "CurveId is mandatory")
+	/* @NotNull(message = "CurveId is mandatory") */
 	private Integer curveId;
 	
 	 private Timestamp asOfDate;
-	/* @Size(min = 1,max=5) */
+	/* @Min( value= 1) */
 	 private Double term;
-	/* @Size(min = 1,max=5) */
+	/*@Min( value= 1) */
 	 private Double value;
 	private Timestamp creationDate;
 	public CurvePoint(@NotBlank(message = "CurveId is mandatory") Integer curveId, Double term, Double value) {

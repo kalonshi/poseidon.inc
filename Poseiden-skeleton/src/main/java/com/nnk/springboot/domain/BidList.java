@@ -24,13 +24,13 @@ public class BidList {
 	@Column(length = 30, nullable = false)
 	/* @NotBlank(message = "Type is mandatory") */
 	private String type;
-	/* @Size(min = 1,max=3) */
+	/* @Size(min = 1) */
 	private Double bidQuantity;
-	/* @Size(min = 1,max=2) */
+	/* @Size(min = 1) */
 	private Double askQuantity;
-	/* @Size(min = 1,max=5) */
+	/* @Size(min = 1) */
 	private Double bid;
-	/* @Size(min = 1,max=2) */
+	/* @Size(min = 1) */
 	private Double ask;
 	@Column(length = 125)
 	private String benchmark;
