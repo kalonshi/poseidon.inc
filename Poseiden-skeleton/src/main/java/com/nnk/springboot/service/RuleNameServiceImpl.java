@@ -70,14 +70,7 @@ private RuleNameRepository ruleNameRepository;
 		
 		return ruleName;
 		
-		/*
-		 * RuleName updateRuleName=new RuleName(); try { updateRuleName=
-		 * getRuleName(id); updateRuleName=ruleName;
-		 * ruleNameRepository.save(updateRuleName); } catch (Exception e) { // TODO:
-		 * handle exception }
-		 * 
-		 * return updateRuleName;
-		 */
+	
 	}
 
 }

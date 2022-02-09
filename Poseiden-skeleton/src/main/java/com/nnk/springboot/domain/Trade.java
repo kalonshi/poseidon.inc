@@ -20,16 +20,16 @@ public class Trade {
 	private String account;
 	 @Column(length = 30, nullable = false) 
 	 private String type;
-	/* @Min( value= 1) */
+	
 	 @Column(name="buyQuantity")
 	private Double buyQuantity;
-	/* @Min( value= 1) */
+	
 	 @Column(name="sellQuantity")
 	private Double sellQuantity;
-	/* @Min( value= 1) */
+	
 	 @Column(name="buyPrice" )
 	private Double buyPrice;
-	/* @Min( value= 1) */
+	
 	 @Column(name="sellPrice")
 	private Double sellPrice;
 	 

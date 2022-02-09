@@ -1,5 +1,6 @@
 package com.nnk.springboot.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,6 +26,7 @@ private TradeRepository tradeRepository;
 	public Trade addTrade(Trade trade) {
 		// TODO Auto-generated method stub
 		if(!trade.equals(null)) {
+			trade.setCreationDate(new Timestamp(System.currentTimeMillis()));
 		tradeRepository.save(trade);
 		}
 		return trade;
@@ -63,11 +65,6 @@ private TradeRepository tradeRepository;
 		tradeRepository.save(trade);
 		return trade;
 		
-		/*
-		 * Trade updateTrade= new Trade(); try { updateTrade=tradeRepository.getOne(id);
-		 * updateTrade=trade; tradeRepository.save(updateTrade); } catch (Exception e) {
-		 * // TODO: handle exception } return updateTrade;
-		 */
 	}
 
 }

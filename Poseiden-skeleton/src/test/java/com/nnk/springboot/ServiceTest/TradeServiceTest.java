@@ -1,4 +1,4 @@
-package com.nnk.springboot;
+package com.nnk.springboot.ServiceTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.nnk.springboot.domain.Trade;
@@ -21,6 +22,7 @@ public class TradeServiceTest {
 	private TradeRepository tradeRepository;
 	@Autowired
 	private TradeService tradeService;
+	@WithMockUser(value = "test")
 	@Test
 	public void tradeServiceTest() {
 		Trade trade = new Trade("Trade Account", "Type");

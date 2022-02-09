@@ -1,4 +1,4 @@
-package com.nnk.springboot;
+package com.nnk.springboot.ServiceTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.nnk.springboot.domain.RuleName;
@@ -22,6 +23,7 @@ public class RuleServiceTest {
 	private RuleNameRepository ruleNameRepository;
 	@Autowired
 	private RuleNameService ruleNameService;
+	@WithMockUser(value = "test")
 	@Test
 	public void ruleServiceTest() {
 		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
@@ -44,7 +46,10 @@ public class RuleServiceTest {
 
 		// Delete
 		
-		  Integer id2 = rule.getId(); ruleNameRepository.delete(rule);
+		  Integer id2 = rule.getId();
+		  ruleNameService.getRuleName(id2);
+		  ruleNameService.deleteRuleName(id2);
+		/* ruleNameRepository.delete(rule); */
 		  Optional<RuleName> ruleList = ruleNameRepository.findById(id2);
 		  Assert.assertFalse(ruleList.isPresent());
 		 

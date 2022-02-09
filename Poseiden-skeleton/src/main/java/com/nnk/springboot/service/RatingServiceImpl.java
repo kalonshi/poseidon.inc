@@ -7,19 +7,19 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 
 @Service
 @Transactional
-public class RatingServiceImpl implements RatingSercive{
-@Autowired
-private RatingRepository ratingRepository;
+public class RatingServiceImpl implements RatingSercive {
+	@Autowired
+	private RatingRepository ratingRepository;
+
 	@Override
 	public List<Rating> ratingList() {
 		// TODO Auto-generated method stub
-		List<Rating> ratingList=ratingRepository.findAll();
+		List<Rating> ratingList = ratingRepository.findAll();
 		return ratingList;
 	}
 
@@ -32,38 +32,36 @@ private RatingRepository ratingRepository;
 
 	@Override
 	public boolean deleteRating(Integer id) {
-		Boolean isDeleted= false;
-		if(!id.equals(null)) {
+		Boolean isDeleted = false;
+		if (!id.equals(null)) {
 			try {
-				Rating rating=ratingRepository.getOne(id);
+				Rating rating = ratingRepository.getOne(id);
 				ratingRepository.delete(rating);
-				isDeleted= true;
+				isDeleted = true;
 			} catch (Exception e) {
 				// TODO: handle exception
-			} 
+			}
 		}
-		
+
 		return isDeleted;
 	}
 
 	@Override
 	public Rating getRating(Integer id) {
-		Rating rating=new Rating();
-		if(!id.equals(null)) {
-			
-		
+		Rating rating = new Rating();
+		if (!id.equals(null)) {
+
 			try {
-		 rating=ratingRepository.getOne(id);
+				rating = ratingRepository.getOne(id);
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-			 catch (Exception e) {
-					// TODO: handle exception
-				}
 		}
 		return rating;
 	}
 
 	@Override
-	public Rating updateRating(Integer id,Rating rating) {
+	public Rating updateRating(Integer id, Rating rating) {
 		// TODO Auto-generated method stub
 		rating.setId(id);
 		ratingRepository.save(rating);

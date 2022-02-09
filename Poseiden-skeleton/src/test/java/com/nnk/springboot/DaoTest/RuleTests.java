@@ -1,4 +1,4 @@
-package com.nnk.springboot;
+package com.nnk.springboot.DaoTest;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class RuleTests {
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
-
+	@WithMockUser(value = "test")
 	@Test
 	public void ruleTest() {
 		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");

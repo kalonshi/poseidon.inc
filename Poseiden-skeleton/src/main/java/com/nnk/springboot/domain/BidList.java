@@ -1,12 +1,12 @@
 package com.nnk.springboot.domain;
 
-import org.springframework.beans.factory.annotation.Required;
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
-import java.sql.Date;
+import javax.persistence.*;
+
+import javax.validation.constraints.NotBlank;
+
+
+
 import java.sql.Timestamp;
 
 @Entity
@@ -15,6 +15,8 @@ public class BidList {
 	// TODO: Map columns in data table BIDLIST with corresponding java fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	 @Column(name="bidListId") 
+	
 	private Integer bidListId;
 
 	@Column(length = 30, nullable = false)
@@ -24,17 +26,19 @@ public class BidList {
 	@Column(length = 30, nullable = false)
 	/* @NotBlank(message = "Type is mandatory") */
 	private String type;
-	/* @Size(min = 1) */
+	
+	@Column(name="bidQuantity")
 	private Double bidQuantity;
-	/* @Size(min = 1) */
+
+	@Column(name="askQuantity")
 	private Double askQuantity;
-	/* @Size(min = 1) */
+	
 	private Double bid;
-	/* @Size(min = 1) */
+	
 	private Double ask;
 	@Column(length = 125)
 	private String benchmark;
-	
+	@Column(name="bidListDate")
 	private Timestamp bidListDate;
 	
 	@Column(length = 125)
@@ -47,21 +51,21 @@ public class BidList {
 	private String trader;
 	@Column(length = 125)
 	private String book;
-	@Column(length = 125)
+	@Column(name="creationName",length = 125)
 	private String creationName;
-
+	@Column(name="creationDate")
 	private Timestamp creationDate;
 	
-	@Column(length = 125)
+	@Column(name="revisionName",length = 125)
 	private String revisionName;
-
+	@Column(name="revisionDate")
 	private Timestamp revisionDate;
 
-	@Column(length = 125)
+	@Column(name="dealName",length = 125)
 	private String dealName;
-	@Column(length = 125)
+	@Column(name="dealType",length = 125)
 	private String dealType;
-	@Column(length = 125)
+	@Column(name="sourceL",length = 125)
 	private String sourceL;
 	@Column(length = 125)
 	private String side;
@@ -141,5 +145,21 @@ public class BidList {
 	public void setBid(Double bid) {
 		this.bid = bid;
 	}
+
+
+
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+
+
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
+	}
+
+
+
+	
 
 }

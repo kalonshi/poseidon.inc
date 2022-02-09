@@ -14,13 +14,14 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@Column(length = 125)
+	@Column(name="moodysRating",length = 125)
 	private String moodysRating;
-	@Column(length = 125)
+	@Column(name="sandPRating",length = 125)
 	private String sandPRating;
-	@Column(length = 125)
+	@Column(name="fitchRating",length = 125)
 	private String fitchRating;
-	/* @Min( value= 1)*/
+	
+	@Column(name="orderNumber")
 	private Integer orderNumber;
 
 	

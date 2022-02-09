@@ -1,4 +1,4 @@
-package com.nnk.springboot;
+package com.nnk.springboot.DaoTest;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class TradeTests {
 
 	@Autowired
 	private TradeRepository tradeRepository;
-
+	@WithMockUser(value = "test")
 	@Test
 	public void tradeTest() {
 		Trade trade = new Trade("Trade Account", "Type");

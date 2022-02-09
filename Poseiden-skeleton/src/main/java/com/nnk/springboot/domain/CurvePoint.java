@@ -4,7 +4,7 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 
 import java.sql.Timestamp;
 
@@ -18,13 +18,15 @@ public class CurvePoint {
 	private Integer id;
 	 @Min(value = 1,message = "CurveId is mandatory")
 	/* @NotNull(message = "CurveId is mandatory") */
-	private Integer curveId;
-	
+	 @Column(name="curveId")
+	 private Integer curveId;
+	 @Column(name="asOfDate")
 	 private Timestamp asOfDate;
-	/* @Min( value= 1) */
+	
 	 private Double term;
-	/*@Min( value= 1) */
+	
 	 private Double value;
+	 @Column(name="creationDate")
 	private Timestamp creationDate;
 	public CurvePoint(@NotBlank(message = "CurveId is mandatory") Integer curveId, Double term, Double value) {
 		super();
@@ -64,6 +66,14 @@ public class CurvePoint {
 
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
 	}
 	
 }
