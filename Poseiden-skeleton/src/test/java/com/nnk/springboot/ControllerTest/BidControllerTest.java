@@ -1,8 +1,10 @@
 package com.nnk.springboot.ControllerTest;
 
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
 import com.nnk.springboot.controllers.BidListController;
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListService;
 
@@ -26,7 +32,21 @@ public class BidControllerTest {
 
 	@MockBean
 	BidListRepository bidListRepository;
-
+	@MockBean
+	BidList bidList;
+	@Autowired
+    private WebApplicationContext context;
+	@Before
+    public void setup() {
+        mvc = MockMvcBuilders
+          .webAppContextSetup(context)
+          .apply(springSecurity())
+          .build();
+    }
+	
+	
+	
+	
 	@WithMockUser(value = "test")
 
 	@Test
@@ -38,6 +58,7 @@ public class BidControllerTest {
 	public void testAddBid() throws Exception {
  mvc.perform(get("/bidList/add")) .andExpect(status().is2xxSuccessful()) ;
 	}
+	
 	/*
 	 * @WithMockUser(value = "test")
 	 * 
@@ -45,29 +66,29 @@ public class BidControllerTest {
 	 * mvc.perform(post("/bidList/add")) .andExpect(status().is2xxSuccessful()) ; }
 	 */
 	
+	
+	
 	/*
-	 * @WithMockUser(value = "test")
+	 * @WithMockUser(username = "test",roles="USER")
 	 * 
 	 * @Test public void testDeleteBid() throws Exception {
-	 * mvc.perform(get("/bidList/delete")) .andExpect(status().is2xxSuccessful()) ;
-	 * }
+	 * mvc.perform(get("/bidList/delete/{id}",69))
+	 * .andExpect(status().is2xxSuccessful()) ; }
+	 * 
 	 */
 	
 	
-	  @WithMockUser(value = "test")
-	  
-	  @Test public void testUpdateBid() throws Exception {
-		  
-		/*
-		 * mvc.perform(get("/bidList/update/?id="+10))
-		 * .andExpect(status().is2xxSuccessful()) ;
-		 */
-		  
-		/*
-		 * mvc.perform(get("/bidList/update/69")) .andExpect(status().isOk()) ;
-		 */
-		 
-	  }
+	
+	
+	
+	
+	/*
+	 * @WithMockUser(value = "test")
+	 * 
+	 * @Test public void testUpdateBid() throws Exception {
+	 * mvc.perform(get("/bidList/update/{id}",69)) .andExpect(status().isOk()) ; }
+	 * 
+	 */
 	 
 	
 	/*

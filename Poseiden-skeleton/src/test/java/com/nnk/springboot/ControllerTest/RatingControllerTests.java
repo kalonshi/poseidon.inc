@@ -51,19 +51,23 @@ public class RatingControllerTests {
 	/*
 	 * @WithMockUser(value = "test")
 	 * 
+	 * 
 	 * @Test public void testDeleteRating() throws Exception {
 	 * mvc.perform(get("/rating/delete")) .andExpect(status().is2xxSuccessful()) ; }
-	 * 
+	 */
+	/*
 	 * @WithMockUser(value = "test")
 	 * 
 	 * @Test public void testUpdateRating() throws Exception {
-	 * mvc.perform(get("/rating/update")) .andExpect(status().is2xxSuccessful()) ; }
-	 * 
+	 * mvc.perform(get("/rating/update/{id}",47)).andExpect(status().isOk()) ; }
+	 */ 
+	/*
 	 * @WithMockUser(value = "test")
 	 * 
 	 * @Test public void testSaveUpdateRating() throws Exception {
 	 * mvc.perform(post("/rating/update")) .andExpect(status().is2xxSuccessful()) ;
 	 * }
 	 */
+	 
 	
 }

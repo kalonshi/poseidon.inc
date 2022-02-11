@@ -18,20 +18,22 @@ public class RatingServiceImpl implements RatingSercive {
 
 	@Override
 	public List<Rating> ratingList() {
-		// TODO Auto-generated method stub
+		// Get the ratings List
 		List<Rating> ratingList = ratingRepository.findAll();
 		return ratingList;
 	}
 
 	@Override
 	public Rating addRating(Rating rating) {
-		// TODO Auto-generated method stub
+		// Add a rating
 		ratingRepository.save(rating);
 		return rating;
 	}
 
 	@Override
 	public boolean deleteRating(Integer id) {
+		
+		// Delete a rating by id
 		Boolean isDeleted = false;
 		if (!id.equals(null)) {
 			try {
@@ -48,6 +50,8 @@ public class RatingServiceImpl implements RatingSercive {
 
 	@Override
 	public Rating getRating(Integer id) {
+		
+		// Get a rating  by id
 		Rating rating = new Rating();
 		if (!id.equals(null)) {
 
@@ -62,17 +66,11 @@ public class RatingServiceImpl implements RatingSercive {
 
 	@Override
 	public Rating updateRating(Integer id, Rating rating) {
-		// TODO Auto-generated method stub
+		// Update a rating
 		rating.setId(id);
 		ratingRepository.save(rating);
 		return rating;
-		/*
-		 * Rating updateRating=new Rating(); try { updateRating=getRating( id);
-		 * updateRating=rating; ratingRepository.save(updateRating); } catch (Exception
-		 * e) { // TODO: handle exception }
-		 * 
-		 * return updateRating;
-		 */
+		
 	}
 
 }

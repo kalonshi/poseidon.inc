@@ -20,7 +20,7 @@ public class CurvePointServiceImpl implements CurvePointService {
 
 	@Override
 	public CurvePoint getCurvePointById(Integer id) {
-		// TODO Auto-generated method stub
+		// // Get a curvePoint  by id
 		CurvePoint curvePoint = new CurvePoint();
 		if (!id.equals(null)) {
 
@@ -35,7 +35,7 @@ public class CurvePointServiceImpl implements CurvePointService {
 
 	@Override
 	public boolean deleteCurvePointById(Integer id) {
-		// TODO Auto-generated method stub
+		//  Delete a curvePoint by id
 		Boolean isDeleteCurvePoint = false;
 		try {
 			CurvePoint curvePointToDelete = getCurvePointById(id);
@@ -51,23 +51,16 @@ public class CurvePointServiceImpl implements CurvePointService {
 
 	@Override
 	public CurvePoint updateCurvePoint(Integer id, CurvePoint curvePoint) {
-		// TODO Auto-generated method stub
+		//  Update a curvePoint
 		curvePoint.setId(id);
 		curvePointRepository.save(curvePoint);
 		return curvePoint;
-		/*
-		 * CurvePoint updateCurvePoint=new CurvePoint(); try {
-		 * updateCurvePoint=getCurvePointById(id); updateCurvePoint=curvePoint;
-		 * curvePointRepository.save(updateCurvePoint); } catch (Exception e) { // TODO:
-		 * handle exception }
-		 * 
-		 * return updateCurvePoint;
-		 */
+		
 	}
 
 	@Override
 	public void addCurvePoint(CurvePoint curvePoint) {
-		// TODO Auto-generated method stub
+		// Add a curvePoint
 		curvePoint.setCreationDate(new Timestamp(System.currentTimeMillis()));
 		curvePointRepository.save(curvePoint);
 
@@ -75,7 +68,7 @@ public class CurvePointServiceImpl implements CurvePointService {
 
 	@Override
 	public List<CurvePoint> curvePointList() {
-
+		// Get the curvePoints List
 		List<CurvePoint> curvePointList = curvePointRepository.findAll();
 		return curvePointList;
 	}

@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 @Service
 public class CheckInputServiceImpl implements CheckInputService {
-	// digit + lowercase char + uppercase char + punctuation + symbol
+	
+	//Requirement for Password registration:At least a size of 8 and max 20 contain  digit + lowercase char + uppercase char + punctuation + symbol
     private static final String PASSWORD_PATTERN =
             "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
 
@@ -17,13 +18,7 @@ public class CheckInputServiceImpl implements CheckInputService {
 
     private static final Pattern patternNumber = Pattern.compile(NUMBER_PATTERN);
     
-    @Override
-	public boolean checkInputIsNumber(Object object) {
-		// TODO Auto-generated method stub
-    	String inputString=object.toString();
-    	Matcher matcherpattern = patternNumber.matcher(inputString);
-        return matcherpattern.matches();
-	}
+  
 
 	@Override
 	public boolean checkPassword(String password) {

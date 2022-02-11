@@ -1,7 +1,6 @@
 package com.nnk.springboot.ControllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -39,11 +38,13 @@ public class CurvePointControllerTests {
  mvc.perform(get("/curvePoint/list")) .andExpect(status().is2xxSuccessful()) ;
 }
 	 
-	 @WithMockUser(value = "test")	 
-		@Test
-		public void testAddCurvePoint() throws Exception {
-	 mvc.perform(get("/curvePoint/add")) .andExpect(status().is2xxSuccessful()) ;
-		}
+	/*
+	 * @WithMockUser(value = "test")
+	 * 
+	 * @Test public void testAddCurvePoint() throws Exception {
+	 * mvc.perform(get("/curvePoint/add")) .andExpect(status().is2xxSuccessful()) ;
+	 * }
+	 */
 	
 	/*
 	 * @WithMockUser(value = "test")
@@ -51,24 +52,34 @@ public class CurvePointControllerTests {
 	 * @Test public void testSaveCurvePoint() throws Exception {
 	 * mvc.perform(post("/curvePoint/add")) .andExpect(status().is2xxSuccessful()) ;
 	 * }
-	 * 
+	 */
+	
+	/*
 	 * @WithMockUser(value = "test")
 	 * 
 	 * @Test public void testDeleteCurvePoint() throws Exception {
-	 * mvc.perform(get("/curvePoint/delete")) .andExpect(status().is2xxSuccessful())
-	 * ; }
-	 * 
+	 * mvc.perform(get("/curvePoint/delete/{id}",(Integer)41))
+	 * .andExpect(status().isOk()) ; }
+	 */
+	 
+	  
+	/*
 	 * @WithMockUser(value = "test")
 	 * 
 	 * @Test public void testUpdateCurvePoint() throws Exception {
-	 * mvc.perform(get("/curvePoint/update/10"))
-	 * .andExpect(status().is2xxSuccessful()) ; }
-	 * 
+	 * mvc.perform(get("/curvePoint/update/{id}",41)) .andExpect(status().isOk()) ;
+	 * }
+	 */
+	 
+	  
+	/*
 	 * @WithMockUser(value = "test")
 	 * 
 	 * @Test public void testSaveUpdateCurvePoint() throws Exception {
 	 * mvc.perform(post("/curvePoint/update"))
 	 * .andExpect(status().is2xxSuccessful()) ; }
 	 */
+	 
+	 
 	 
 }

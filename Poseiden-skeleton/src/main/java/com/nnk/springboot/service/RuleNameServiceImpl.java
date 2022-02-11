@@ -18,14 +18,14 @@ public class RuleNameServiceImpl implements RuleNameService {
 private RuleNameRepository ruleNameRepository;
 	@Override
 	public List<RuleName> ruleNameList() {
-		// TODO Auto-generated method stub
+		// Get rules List
 		List<RuleName> ruleNameList=ruleNameRepository.findAll();
 		return ruleNameList;
 	}
 
 	@Override
 	public RuleName addRuleName(RuleName ruleName) {
-		// TODO Auto-generated method stub
+		// Add rule
 		RuleName addRuleName= new RuleName();
 		if(!ruleName.equals(null)) {
 		ruleNameRepository.save(ruleName);
@@ -36,6 +36,9 @@ private RuleNameRepository ruleNameRepository;
 
 	@Override
 	public boolean deleteRuleName(Integer id) {
+		
+		// Delete rule by id  
+		
 		Boolean isDeleted= false;
 		if(!id.equals(null)) {
 			try {
@@ -52,7 +55,7 @@ private RuleNameRepository ruleNameRepository;
 
 	@Override
 	public RuleName getRuleName(Integer id) {
-		// TODO Auto-generated method stub
+		// Get rule by id
 		RuleName getRuleName=new RuleName();
 		try {
 			getRuleName=ruleNameRepository.getOne(id);
@@ -64,7 +67,7 @@ private RuleNameRepository ruleNameRepository;
 
 	@Override
 	public RuleName updateRuleName(Integer id,RuleName ruleName) {
-		// TODO Auto-generated method stub
+		// Update rule by id 
 		ruleName.setId(id);
 		ruleNameRepository.save(ruleName);
 		
