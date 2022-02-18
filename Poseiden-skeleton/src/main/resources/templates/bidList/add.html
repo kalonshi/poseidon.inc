@@ -46,6 +46,8 @@
 							placeholder="bidQuantity" class="col-4">
 						<p class="text-danger" th:if="${#fields.hasErrors('bidQuantity')}"
 							th:errors="*{bidQuantity}"></p>
+							<!-- <p class="text-danger" th:if="${bidError}"
+							> Must be a Number</p> -->
 					</div>
 				</div>
 				<div class="form-group">
