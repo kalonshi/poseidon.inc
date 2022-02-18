@@ -1,10 +1,12 @@
 package com.nnk.springboot.ControllerTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Optional;
@@ -27,6 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListService;
 
@@ -122,4 +125,11 @@ public class BidControllerTest {
 		
 	}
 
+	@WithMockUser(value = "test")
+	  @Test public void testDeleteCurvePoint() throws Exception {
+		BidList bid = new BidList("test", "test", 10d);
+		when(bidListRepository.findById(69)).thenReturn(Optional.of(bid));
+		doNothing().when(bidListRepository).delete(bid);; 
+	  mvc.perform(get("/bidList/delete/69")) .andExpect(redirectedUrl("/bidList/list")) ;
+	  }
 }

@@ -1,5 +1,6 @@
 package com.nnk.springboot.ControllerTest;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -67,14 +68,13 @@ public class RatingControllerTests {
 	
 		
 	
-	/*
-	 * @WithMockUser(value = "test")
-	 * 
-	 * @Test public void testDeleteRating() throws Exception { Rating rating = new
-	 * Rating("moodysRating", "sandPRating", "fitchRating", 10); rating.setId(69);
-	 * when(ratingRepository.deleteById(69)).thenReturn(Optional.of(rating));
-	 * mvc.perform(get("/rating/delete/19")).andExpect(status().isOk()) ; }
-	 */
+	 @WithMockUser(value = "test")
+	  @Test public void testDeleteRating() throws Exception {
+		 Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
+		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
+		doNothing().when(ratingRepository).delete(rating);; 
+	  mvc.perform(get("/rating/delete/69")) .andExpect(redirectedUrl("/rating/list")) ;
+	  }
 	
 	  @WithMockUser(value = "test")
 	  @Test public void testUpdateRating() throws Exception {

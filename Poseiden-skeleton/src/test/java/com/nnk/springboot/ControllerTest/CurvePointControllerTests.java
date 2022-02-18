@@ -1,7 +1,9 @@
 package com.nnk.springboot.ControllerTest;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -83,13 +85,15 @@ public class CurvePointControllerTests {
 		mvc.perform(post("/curvePoint/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
 	}
-	/*
-	 * @WithMockUser(value = "test")
-	 * 
-	 * @Test public void testDeleteCurvePoint() throws Exception {
-	 * mvc.perform(get("/curvePoint/delete/{id}",41)) .andExpect(status().isOk()) ;
-	 * }
-	 */
+	
+	  @WithMockUser(value = "test")
+	  @Test public void testDeleteCurvePoint() throws Exception {
+		  CurvePoint curvePoint = new CurvePoint(10, 10d, 10d);
+			when(curvePointRepository.findById(69)).thenReturn(Optional.of(curvePoint));
+			doNothing().when(curvePointRepository).delete(curvePoint);; 
+	  mvc.perform(get("/curvePoint/delete/69")) .andExpect(redirectedUrl("/curvePoint/list")) ;
+	  }
+	 
 
 	@WithMockUser(value = "test")
 	// Test security of Unregistrer User to update

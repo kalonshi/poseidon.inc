@@ -1,5 +1,6 @@
 package com.nnk.springboot.ControllerTest;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -90,13 +91,14 @@ public class RuleControllerTests {
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
 
 		}
-	/*
-	 * @WithMockUser(value = "test")
-	 * 
-	 * @Test public void testDeleteRuleName() throws Exception {
-	 * mvc.perform(get("/ruleName/delete")) .andExpect(status().is2xxSuccessful()) ;
-	 * }
-	 */
+	@WithMockUser(value = "test")
+	  @Test public void testDeleteRule() throws Exception {
+		RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
+
+		when(ruleNameRepository.findById(69)).thenReturn(Optional.of(ruleName));
+		doNothing().when(ruleNameRepository).delete(ruleName);; 
+	  mvc.perform(get("/ruleName/delete/69")) .andExpect(redirectedUrl("/ruleName/list")) ;
+	  }
 	@WithMockUser(value = "test")
 
 	@Test

@@ -1,5 +1,6 @@
 package com.nnk.springboot.ControllerTest;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,6 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nnk.springboot.controllers.TradeController;
+import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 
@@ -88,16 +90,14 @@ public class TradeControllerTests {
 		mvc.perform(post("/trade/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
 	}
-	/*
-	 * @WithMockUser(value = "test")
-	 * 
-	 * @Test public void testDeleteTrade() throws Exception {
-	 * 
-	 * Trade trade =new Trade("account"," type");
-	 * when(tradeRepository.delete(trade)).thenReturn(Optional.of(trade));
-	 * mvc.perform(get("/trade/delete/69")).andExpect(status().isOk()); }
-	 */
-
+	
+	  @WithMockUser(value = "test")
+	  @Test public void testDeleteTrade() throws Exception {
+		  Trade trade =new Trade("account"," type");
+		when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
+		doNothing().when(tradeRepository).delete(trade); 
+	  mvc.perform(get("/trade/delete/69")) .andExpect(redirectedUrl("/trade/list")) ;
+	  }
 	@WithMockUser(value = "test")
 	@Test
 	public void testUpdateTrade() throws Exception {
