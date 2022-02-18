@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 @Controller
 public class RuleNameController {
-	
+
 	@Autowired
 	private RuleNameService ruleService;
 	@Autowired
@@ -30,7 +30,6 @@ public class RuleNameController {
 
 	private static final Logger logger = LogManager.getLogger(RuleNameController.class);
 
-	
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
 		// TODO: find all RuleName, add to model
@@ -50,7 +49,9 @@ public class RuleNameController {
 	public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 		// TODO: check data valid and save to db, after saving return RuleName list
 		logger.info("Entering validate new Rulename method ");
-		if (!(result.hasErrors()&& ruleName.getJson().isEmpty()&&ruleName.getName().isEmpty()&& ruleName.getSqlPart().isEmpty()&& ruleName.getTemplate().isEmpty()&& ruleName.getSqlStr().isEmpty()&& ruleName.getDescription().isEmpty() )) {
+		if (!result.hasErrors() && !ruleName.getJson().isEmpty() && !ruleName.getName().isEmpty()
+				&& !ruleName.getSqlPart().isEmpty() && !ruleName.getTemplate().isEmpty()
+				&& !ruleName.getSqlStr().isEmpty() && !ruleName.getDescription().isEmpty()) {
 			ruleService.addRuleName(ruleName);
 			model.addAttribute("ruleNames", ruleNameRepository.findAll());
 			return "redirect:/ruleName/list";
@@ -74,11 +75,14 @@ public class RuleNameController {
 			Model model) {
 		// TODO: check required fields, if valid call service to update RuleName and
 		logger.info("Entering save Update Rulename method : Id ruleName to Update= " + id);
-		if ((result.hasErrors()&& ruleName.getJson().isEmpty()&&ruleName.getName().isEmpty()&& ruleName.getSqlPart().isEmpty()&& ruleName.getTemplate().isEmpty()&& ruleName.getSqlStr().isEmpty()&& ruleName.getDescription().isEmpty() )) {
+
+		if (result.hasErrors()) {
+
 			return "ruleName/update";
 		}
+
 		ruleService.updateRuleName(id, ruleName);
-		model.addAttribute("ruleNames", ruleNameRepository.findAll());
+		model.addAttribute("ruleNames", ruleService.ruleNameList());
 
 		return "redirect:/ruleName/list";
 	}
@@ -86,9 +90,9 @@ public class RuleNameController {
 	@GetMapping("/ruleName/delete/{id}")
 	public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
 		// TODO: Find RuleName by Id and delete the RuleName, return to Rule list
-		
+
 		logger.info("Entering Delete method for a RuleName: Id RuleName to delete= " + id);
-		
+
 		RuleName RuleNameTodelete = ruleNameRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
 		ruleNameRepository.delete(RuleNameTodelete);

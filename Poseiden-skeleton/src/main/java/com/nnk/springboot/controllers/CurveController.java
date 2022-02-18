@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,14 +48,16 @@ public class CurveController {
 	public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
 		// TODO: check data valid and save to db, after saving return Curve list
 		logger.info("Entering Save method for a CurvePoint");
-		Double term = curvePoint.getTerm();
-		Double value = curvePoint.getValue();
-		if (!result.hasErrors() && curvePoint.getTerm() != (null) && curvePoint.getValue() != (null)) {
+		/*
+		 * Double term = curvePoint.getTerm(); Double value = curvePoint.getValue();
+		 */
+		if (!result.hasErrors() ) {
 
 			curvePointdervice.addCurvePoint(curvePoint);
 			model.addAttribute("curvePoints", curvePointRepository.findAll());
 			return "redirect:/curvePoint/list";
 		}
+		
 		return "curvePoint/add";
 	}
 
@@ -79,11 +82,11 @@ public class CurveController {
 		logger.info("Entering Update method for a CurvePoint: Id CurvePoint = " + id);
 
 		// check required fields
-		if (result.hasErrors() && curvePoint.getTerm() != (null) && curvePoint.getValue() != (null)) {
+		if (result.hasErrors() ) {
 			return "curvePoint/update";
 		}
 
-		curvePointdervice.addCurvePoint(curvePoint);
+		curvePointdervice.updateCurvePoint(id, curvePoint);
 		model.addAttribute("curvePoints", curvePointRepository.findAll());
 
 		return "redirect:/curvePoint/list";

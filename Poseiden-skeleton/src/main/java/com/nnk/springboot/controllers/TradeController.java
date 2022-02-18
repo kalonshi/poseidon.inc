@@ -1,6 +1,6 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
+
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.service.TradeService;
@@ -50,8 +50,7 @@ public class TradeController {
 	public String validate(@Valid Trade trade, BindingResult result, Model model) {
 		// TODO: check data valid and save to db, after saving return Trade list
 		logger.info("Entering save  new Trade method ");
-		if (!result.hasErrors() && !trade.getAccount().isEmpty() && !trade.getType().isEmpty()
-				&& trade.getBuyQuantity() != null) {
+		if (!result.hasErrors()) {
 			tradeService.addTrade(trade);
 
 			model.addAttribute("trades", tradeService.tradeList());
@@ -81,8 +80,9 @@ public class TradeController {
 		logger.info("Entering save Update Trade method : Id Trade  Updated= " + id);
 
 		// check required fields
-		if (result.hasErrors() && trade.getAccount().isEmpty() && trade.getType().isEmpty()
-				&& trade.getBuyQuantity() == null) {
+		if (result.hasErrors()  ) {
+			
+			
 			return "trade/update";
 		}
 

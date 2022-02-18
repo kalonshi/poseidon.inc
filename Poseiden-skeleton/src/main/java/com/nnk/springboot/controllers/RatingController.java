@@ -51,8 +51,7 @@ public class RatingController {
 		// TODO: check data valid and save to db, after saving return Rating list
 		logger.info("Entering validate method to save a rating");
 
-		if (!result.hasErrors() && !rating.getFitchRating().isEmpty() && !rating.getMoodysRating().isEmpty()
-				&& !rating.getSandPRating().isEmpty() && rating.getOrderNumber() != null) {
+		if (!result.hasErrors()) {
 			ratingService.addRating(rating);
 			model.addAttribute("ratings", ratingRepository.findAll());
 
@@ -83,8 +82,7 @@ public class RatingController {
 
 		logger.info("Entering Save Update method for a Rating: Id Rating to Update) = " + id);
 
-		if (result.hasErrors() && !rating.getFitchRating().isEmpty() && rating.getMoodysRating().isEmpty()
-				&& rating.getSandPRating().isEmpty() && rating.getOrderNumber() == null) {
+		if (result.hasErrors()) {
 			return "rating/update";
 		}
 		ratingService.addRating(rating);

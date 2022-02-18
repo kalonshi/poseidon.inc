@@ -52,13 +52,17 @@ public class BidListController {
 		// TODO: check data valid and save to db, after saving return bid list
 		logger.info("Entering validate method to save new Bid ");
 		// check data valid
-		if (!result.hasErrors() && !bid.getAccount().isEmpty() && !bid.getType().isEmpty()
-				&& bid.getBidQuantity() != null) {
+		/* boolean isNumber= false; */
+		if (!result.hasErrors()) {
 			bidListService.addBid(bid);
 			model.addAttribute("bidLists", bidListRepository.findAll());
 
 			return "redirect:/bidList/list";
 		}
+		/*
+		 * isNumber=true; model.addAttribute("bidError", isNumber);
+		 */	
+		
 		return "bidList/add";
 	}
 
@@ -82,10 +86,11 @@ public class BidListController {
 		logger.info("Entering  Save Update() Bid method : Id Bid =" + id);
 
 		if (result.hasErrors()) {
+
 			return "bidList/update";
 		}
 
-		bidListService.addBid(bidList);
+		bidListService.updateBidList(id, bidList);
 		model.addAttribute("bidLists", bidListService.bidList());
 
 		return "redirect:/bidList/list";
