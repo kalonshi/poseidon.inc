@@ -1,11 +1,11 @@
 package com.nnk.springboot.domain;
 
-
 import javax.persistence.*;
-
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import java.sql.Timestamp;
 
@@ -15,8 +15,8 @@ public class BidList {
 	// TODO: Map columns in data table BIDLIST with corresponding java fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	 @Column(name="bidListId") 
-	
+	@Column(name = "bidListId")
+
 	private Integer bidListId;
 
 	@Column(length = 30, nullable = false)
@@ -24,23 +24,25 @@ public class BidList {
 	private String account;
 
 	@Column(length = 30, nullable = false)
-	/* @NotBlank(message = "Type is mandatory") */
+	@NotBlank(message = "Type is mandatory")
+
 	private String type;
+
+	@Column(name = "bidQuantity")
+	 @NotNull(message = "bidQuantity  is mandatory") 
 	
-	@Column(name="bidQuantity")
 	private Double bidQuantity;
 
-	@Column(name="askQuantity")
+	@Column(name = "askQuantity")
 	private Double askQuantity;
-	
+
 	private Double bid;
-	
+
 	private Double ask;
 	@Column(length = 125)
 	private String benchmark;
-	@Column(name="bidListDate")
+	@Column(name = "bidListDate")
 	private Timestamp bidListDate;
-	
 	@Column(length = 125)
 	private String commentary;
 	@Column(length = 125)
@@ -51,21 +53,21 @@ public class BidList {
 	private String trader;
 	@Column(length = 125)
 	private String book;
-	@Column(name="creationName",length = 125)
+	@Column(name = "creationName", length = 125)
 	private String creationName;
-	@Column(name="creationDate")
+	@Column(name = "creationDate")
 	private Timestamp creationDate;
-	
-	@Column(name="revisionName",length = 125)
+
+	@Column(name = "revisionName", length = 125)
 	private String revisionName;
-	@Column(name="revisionDate")
+	@Column(name = "revisionDate")
 	private Timestamp revisionDate;
 
-	@Column(name="dealName",length = 125)
+	@Column(name = "dealName", length = 125)
 	private String dealName;
-	@Column(name="dealType",length = 125)
+	@Column(name = "dealType", length = 125)
 	private String dealType;
-	@Column(name="sourceL",length = 125)
+	@Column(name = "sourceL", length = 125)
 	private String sourceL;
 	@Column(length = 125)
 	private String side;
@@ -78,49 +80,33 @@ public class BidList {
 		this.bidQuantity = bidQuantity;
 	}
 
-
-
 	public BidList() {
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public String getAccount() {
 		return account;
 	}
 
-
-
 	public void setAccount(String account) {
 		this.account = account;
 	}
-
-
 
 	public String getType() {
 		return type;
 	}
 
-
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
 
 	public Double getAskQuantity() {
 		return askQuantity;
 	}
 
-
-
 	public void setAskQuantity(Double askQuantity) {
 		this.askQuantity = askQuantity;
 	}
-
-
 
 	public Integer getBidListId() {
 		return bidListId;
@@ -146,20 +132,12 @@ public class BidList {
 		this.bid = bid;
 	}
 
-
-
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}
 
-
-
 	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
-
-
-
-	
 
 }
