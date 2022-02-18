@@ -59,11 +59,13 @@ public class LoginControlerTest {
 	 * @Test void contextLoads()throws Exception {
 	 * assertThat(controller).isNotNull(); }
 	 */
+	
 	/*
 	 * @Test public void shouldReturnDefaultHomePage() throws Exception {
 	 * mvc.perform(formLogin("/login").user("test").password("1234")).
-	 * andExpect(authenticated());}
+	 * andExpect(status().isOk());}
 	 */
+	 
 	 
 	  @Test public void userLoginFailed() throws Exception {
 	  mvc.perform(formLogin("/login").user("test").password("wrongpassword")).

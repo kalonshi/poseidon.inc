@@ -27,28 +27,33 @@ public class CurvePointTests {
 		// Save
 		
 		  curvePoint = curvePointRepository.save(curvePoint);
-		/*
-		 * Assert.assertNotNull(curvePoint.getId());
-		 * Assert.assertTrue(curvePoint.getCurveId() == 10);
-		 */
+		
+		  Assert.assertNotNull(curvePoint.getId());
+		  Assert.assertTrue(curvePoint.getCurveId() == 10);
+		  Assert.assertTrue(curvePoint.getTerm() == 10d);
+		  Assert.assertTrue(curvePoint.getValue() == 30d);
 		 
 		// Update
-		/*
-		 * curvePoint.setCurveId(20); curvePoint =
-		 * curvePointRepository.save(curvePoint);
-		 * Assert.assertTrue(curvePoint.getCurveId() == 20);
-		 */
+		
+		  curvePoint.setCurveId(20); 
+		  curvePoint.setTerm(20d);
+		  curvePoint.setValue(100d);
+		  curvePoint =  curvePointRepository.save(curvePoint);
+		  Assert.assertTrue(curvePoint.getCurveId() == 20);
+		  Assert.assertTrue(curvePoint.getTerm() == 20d);
+		  Assert.assertTrue(curvePoint.getValue() == 100d);
+		 
 		// Find
-		/*
-		 * List<CurvePoint> listResult = curvePointRepository.findAll();
-		 * Assert.assertTrue(listResult.size() > 0);
-		 */
+		
+		  List<CurvePoint> listResult = curvePointRepository.findAll();
+		  Assert.assertTrue(listResult.size() > 0);
+		 
 		// Delete
-		/*
-		 * Integer id = curvePoint.getId(); curvePointRepository.delete(curvePoint);
-		 * Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
-		 * Assert.assertFalse(curvePointList.isPresent());
-		 */
+		
+		  Integer id = curvePoint.getId(); curvePointRepository.delete(curvePoint);
+		  Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
+		  Assert.assertFalse(curvePointList.isPresent());
+		 
 	}
 
 }

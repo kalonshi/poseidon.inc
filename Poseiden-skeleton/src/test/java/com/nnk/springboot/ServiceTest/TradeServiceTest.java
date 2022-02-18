@@ -25,7 +25,7 @@ public class TradeServiceTest {
 	@WithMockUser(value = "test")
 	@Test
 	public void tradeServiceTest() {
-		Trade trade = new Trade("Trade Account", "Type");
+		Trade trade = new Trade("Trade Account", "Type",10d);
 
 		// Save
 		tradeService.addTrade(trade);
