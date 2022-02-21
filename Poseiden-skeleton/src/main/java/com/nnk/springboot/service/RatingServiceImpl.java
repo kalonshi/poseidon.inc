@@ -32,7 +32,7 @@ public class RatingServiceImpl implements RatingSercive {
 
 	@Override
 	public boolean deleteRating(Integer id) {
-		
+
 		// Delete a rating by id
 		Boolean isDeleted = false;
 		if (!id.equals(null)) {
@@ -50,8 +50,8 @@ public class RatingServiceImpl implements RatingSercive {
 
 	@Override
 	public Rating getRating(Integer id) {
-		
-		// Get a rating  by id
+
+		// Get a rating by id
 		Rating rating = new Rating();
 		if (!id.equals(null)) {
 
@@ -70,7 +70,7 @@ public class RatingServiceImpl implements RatingSercive {
 		rating.setId(id);
 		ratingRepository.save(rating);
 		return rating;
-		
+
 	}
 
 }

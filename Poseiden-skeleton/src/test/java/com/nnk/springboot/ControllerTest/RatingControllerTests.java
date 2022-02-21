@@ -44,92 +44,84 @@ public class RatingControllerTests {
 	@Autowired
 	private WebApplicationContext context;
 
-	
-
-	
 	@Before()
-	public void setup()
-	{
-	    //Init MockMvc Object and build
-	    mvc = MockMvcBuilders.webAppContextSetup(context).build();
+	public void setup() {
+		// Init MockMvc Object and build
+		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
-	
-	 @WithMockUser(value = "test") 
-		@Test
-		public void testShowWatchRatingList() throws Exception {
-	 mvc.perform(get("/rating/list")) .andExpect(status().is2xxSuccessful()) ;
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testShowWatchRatingList() throws Exception {
+		mvc.perform(get("/rating/list")).andExpect(status().is2xxSuccessful());
 	}
-	 
-	 @WithMockUser(value = "test")	 
-		@Test
-		public void testAddrating() throws Exception {
-	 mvc.perform(get("/rating/add")) .andExpect(status().is2xxSuccessful()) ;
-		}
-	
-		
-	
-	 @WithMockUser(value = "test")
-	  @Test public void testDeleteRating() throws Exception {
-		 Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testAddrating() throws Exception {
+		mvc.perform(get("/rating/add")).andExpect(status().is2xxSuccessful());
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testDeleteRating() throws Exception {
+		Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
 		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
-		doNothing().when(ratingRepository).delete(rating);; 
-	  mvc.perform(get("/rating/delete/69")) .andExpect(redirectedUrl("/rating/list")) ;
-	  }
-	
-	  @WithMockUser(value = "test")
-	  @Test public void testUpdateRating() throws Exception {
-	 
-		  Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
-			
-		  when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
+		doNothing().when(ratingRepository).delete(rating);
+		;
+		mvc.perform(get("/rating/delete/69")).andExpect(redirectedUrl("/rating/list"));
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testUpdateRating() throws Exception {
+
+		Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
+
+		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
 		mvc.perform(get("/rating/update/69")).andExpect(status().isOk());
-}
-	
-	  @WithMockUser(value = "test")
-	  
-	  @Test public void testSaveUpdateRating() throws Exception {
-		
-		  
-		  Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
-			
-		  when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
-		  rating.setFitchRating("fitchRatingUpdated");
-		  
-		mvc.perform(post("/rating/update/69")).andExpect(status().isOk()); 
-	  }
-	 
- @WithMockUser(value = "test")
-	  
-	  @Test public void testFailsSaveUpdates() throws Exception {
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testSaveUpdateRating() throws Exception {
+
+		Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
+
+		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
+		rating.setFitchRating("fitchRatingUpdated");
+
+		mvc.perform(post("/rating/update/69")).andExpect(status().isOk());
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testFailsSaveUpdates() throws Exception {
 		Rating rating = new Rating();
-			
-		  when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
-		  rating.setFitchRating("fitchRatingUpdated");
-		  
-		mvc.perform(post("/rating/update/69")).andExpect(status().is(200)); 
-	  }
- @WithMockUser(value = "test")
- 
- @Test public void testSaveRating() throws Exception {
-	
-	  
-	  Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
-		
-	  when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
-	  
-	  
-	mvc.perform(post("/rating/validate")).andExpect(status().isOk()); 
- }
-@WithMockUser(value = "test")
- 
- @Test public void testFailsSaveRating() throws Exception {
-	
-	  
-	  Rating rating = new Rating();
-		
-	  when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
-	  
-	  
-	mvc.perform(post("/rating/validate")).andExpect(status().is(200)); 
- }
+
+		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
+		rating.setFitchRating("fitchRatingUpdated");
+
+		mvc.perform(post("/rating/update/69")).andExpect(status().is(200));
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testSaveRating() throws Exception {
+
+		Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 10);
+
+		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
+		mvc.perform(post("/rating/validate")).andExpect(status().isOk());
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testFailsSaveRating() throws Exception {
+
+		Rating rating = new Rating();
+
+		when(ratingRepository.findById(69)).thenReturn(Optional.of(rating));
+		mvc.perform(post("/rating/validate")).andExpect(status().is(200));
+	}
 }

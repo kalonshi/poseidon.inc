@@ -20,7 +20,7 @@ public class CurvePointServiceImpl implements CurvePointService {
 
 	@Override
 	public CurvePoint getCurvePointById(Integer id) {
-		// // Get a curvePoint  by id
+		 // Get a curvePoint  by id
 		CurvePoint curvePoint = new CurvePoint();
 		if (!id.equals(null)) {
 

@@ -24,6 +24,7 @@ public class BidServiceTests {
 	private BidListService bidListService;
 	@Autowired
 	private BidListRepository bidListRepository;
+
 	@WithMockUser(value = "test")
 	@Test
 	public void bidListServiceTest() {

@@ -1,8 +1,5 @@
 package com.nnk.springboot.ControllerTest;
 
-
-
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
@@ -43,39 +40,21 @@ public class LoginControlerTest {
 	@MockBean
 	CheckInputService checkInputService;
 	@Autowired
-    private WebApplicationContext context;
+	private WebApplicationContext context;
+
 	@Before
-    public void setup() {
-        mvc = MockMvcBuilders
-          .webAppContextSetup(context)
-          .apply(springSecurity())
-          .build();
-    }
+	public void setup() {
+		mvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
+	}
+
 	@Test
 	public void shouldReturnDefaultMessage() throws Exception {
-	mvc.perform(get("/login")).andDo(print()).andExpect(status().isOk());
+		mvc.perform(get("/login")).andDo(print()).andExpect(status().isOk());
 	}
-	/*
-	 * @Test void contextLoads()throws Exception {
-	 * assertThat(controller).isNotNull(); }
-	 */
-	
-	/*
-	 * @Test public void shouldReturnDefaultHomePage() throws Exception {
-	 * mvc.perform(formLogin("/login").user("test").password("1234")).
-	 * andExpect(status().isOk());}
-	 */
-	 
-	 
-	  @Test public void userLoginFailed() throws Exception {
-	  mvc.perform(formLogin("/login").user("test").password("wrongpassword")).
-	  andExpect(unauthenticated()); }
-	 
 
-	
-	/*
-	 * @Test public void userLoginTest() throws Exception {
-	 * mvc.perform(formLogin("/login").user("test").password("1234")).andExpect(
-	 * authenticated()); }
-	 */
+	@Test
+	public void userLoginFailed() throws Exception {
+		mvc.perform(formLogin("/login").user("test").password("wrongpassword")).andExpect(unauthenticated());
+	}
+
 }

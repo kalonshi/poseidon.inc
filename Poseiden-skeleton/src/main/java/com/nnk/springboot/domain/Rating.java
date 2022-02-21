@@ -11,26 +11,26 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "rating")
 public class Rating {
-	// TODO: Map columns in data table RATING with corresponding java fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@Column(name="moodysRating",length = 125)
+
+	@Column(name = "moodysRating", length = 125)
 	@NotBlank(message = "moodysRating is mandatory")
 	private String moodysRating;
-	@Column(name="sandPRating",length = 125)
+
+	@Column(name = "sandPRating", length = 125)
 	@NotBlank(message = "sandPRating is mandatory")
 	private String sandPRating;
-	@Column(name="fitchRating",length = 125)
+
+	@Column(name = "fitchRating", length = 125)
 	@NotBlank(message = "fitchRating is mandatory")
 	private String fitchRating;
-	
-	@Column(name="orderNumber")
+
+	@Column(name = "orderNumber")
 	@NotNull(message = "orderNumber  is mandatory")
 	@Min(value = 1, message = "orderNumber is mandatory")
 	private Integer orderNumber;
-
-	
 
 	public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
 		super();

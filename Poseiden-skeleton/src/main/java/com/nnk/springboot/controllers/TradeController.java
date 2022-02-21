@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.service.TradeService;
@@ -32,7 +31,6 @@ public class TradeController {
 
 	@RequestMapping("/trade/list")
 	public String home(Model model) {
-		// TODO: find all Trade, add to model
 
 		logger.info("Entering home method for trade: List of trades");
 		List<Trade> trades = tradeService.tradeList();
@@ -56,13 +54,12 @@ public class TradeController {
 			model.addAttribute("trades", tradeService.tradeList());
 			return "redirect:/trade/list";
 		}
-
+		logger.info("Fail to add a new Trade method ");
 		return "trade/add";
 	}
 
 	@GetMapping("/trade/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		// TODO: get Trade by Id and to model then show to the form
 
 		logger.info("Entering  Update Trade method : Id Trade to  Update= " + id);
 
@@ -75,26 +72,25 @@ public class TradeController {
 
 	@PostMapping("/trade/update/{id}")
 	public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade, BindingResult result, Model model) {
-		// TODO: check required fields, if valid call service to update Trade and return
-		// Trade list
+
 		logger.info("Entering save Update Trade method : Id Trade  Updated= " + id);
 
-		// check required fields
-		if (result.hasErrors()  ) {
-			
-			
+		if (result.hasErrors()) {
+
+			logger.info("Fail to Update Trade  : Id Trade Not Updated= " + id);
 			return "trade/update";
 		}
 
 		tradeService.updateTrade(id, trade);
 		model.addAttribute("trades", tradeService.tradeList());
+		logger.info("succes to Update Trade  : Id Trade  Updated= " + id);
 
 		return "redirect:/trade/list";
 	}
 
 	@GetMapping("/trade/delete/{id}")
 	public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-		// TODO: Find Trade by Id and delete the Trade, return to Trade list
+
 		logger.info("Entering Delete method for a Trade: Id Trade to delete= " + id);
 
 		Trade tradeTodelete = tradeRepository.findById(id)

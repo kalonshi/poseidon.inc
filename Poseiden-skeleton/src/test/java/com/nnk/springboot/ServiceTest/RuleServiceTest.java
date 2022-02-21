@@ -18,11 +18,12 @@ import com.nnk.springboot.service.RuleNameService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RuleServiceTest {
-	
+
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
 	@Autowired
 	private RuleNameService ruleNameService;
+
 	@WithMockUser(value = "test")
 	@Test
 	public void ruleServiceTest() {
@@ -36,7 +37,7 @@ public class RuleServiceTest {
 		// Update
 		Integer id = rule.getId();
 		rule.setName("Rule Name Update");
-		
+
 		rule = ruleNameService.updateRuleName(id, rule);
 		Assert.assertTrue(rule.getName().equals("Rule Name Update"));
 
@@ -45,13 +46,13 @@ public class RuleServiceTest {
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
-		
-		  Integer id2 = rule.getId();
-		  ruleNameService.getRuleName(id2);
-		  ruleNameService.deleteRuleName(id2);
-		/* ruleNameRepository.delete(rule); */
-		  Optional<RuleName> ruleList = ruleNameRepository.findById(id2);
-		  Assert.assertFalse(ruleList.isPresent());
-		 
+
+		Integer id2 = rule.getId();
+		ruleNameService.getRuleName(id2);
+		ruleNameService.deleteRuleName(id2);
+
+		Optional<RuleName> ruleList = ruleNameRepository.findById(id2);
+		Assert.assertFalse(ruleList.isPresent());
+
 	}
 }

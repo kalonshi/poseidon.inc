@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "trade")
 public class Trade {
-	// TODO: Map columns in data table TRADE with corresponding java fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "TradeId")
@@ -24,8 +23,7 @@ public class Trade {
 	private String type;
 
 	@Column(name = "buyQuantity")
-	@NotNull(message = "buyQuantity is mandatory") 
-	
+	@NotNull(message = "buyQuantity is mandatory")
 	private Double buyQuantity;
 
 	@Column(name = "sellQuantity")
@@ -38,30 +36,43 @@ public class Trade {
 	private Double sellPrice;
 
 	private String benchmark;
+
 	@Column(name = "tradeDate")
 	private Timestamp tradeDate;
+
 	@Column(length = 125)
 	private String security;
+
 	@Column(length = 10)
 	private String status;
+
 	@Column(length = 125)
 	private String trader;
+
 	@Column(length = 125)
 	private String book;
+
 	@Column(name = "creationName", length = 125)
 	private String creationName;
+
 	@Column(name = "creationDate")
 	Timestamp creationDate;
+
 	@Column(name = "revisionName", length = 125)
 	private String revisionName;
+
 	@Column(name = "revisionDate", length = 125)
 	Timestamp revisionDate;
+
 	@Column(name = "dealName", length = 125)
 	private String dealName;
+
 	@Column(name = "dealType", length = 125)
 	private String dealType;
+
 	@Column(name = "sourceListId", length = 125)
 	private String sourceListId;
+
 	@Column(length = 125)
 	private String side;
 

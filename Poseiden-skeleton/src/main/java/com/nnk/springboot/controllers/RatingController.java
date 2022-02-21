@@ -3,7 +3,6 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.RatingSercive;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class RatingController {
 
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
-		// TODO: find all Rating, add to model
+
 		logger.info("Entering  Home method for Rating List");
 
 		List<Rating> allRatings = ratingService.ratingList();
@@ -48,7 +47,7 @@ public class RatingController {
 
 	@PostMapping("/rating/validate")
 	public String validate(@Valid Rating rating, BindingResult result, Model model) {
-		// TODO: check data valid and save to db, after saving return Rating list
+
 		logger.info("Entering validate method to save a rating");
 
 		if (!result.hasErrors()) {
@@ -64,7 +63,7 @@ public class RatingController {
 
 	@GetMapping("/rating/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		// TODO: get Rating by Id and to model then show to the form
+
 		logger.info("Entering Update method for a Rating: Id Rating to update = " + id);
 
 		Rating rating = ratingRepository.findById(id)
@@ -77,8 +76,6 @@ public class RatingController {
 	@PostMapping("/rating/update/{id}")
 	public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult result,
 			Model model) {
-		// TODO: check required fields, if valid call service to update Rating and
-		// return Rating list
 
 		logger.info("Entering Save Update method for a Rating: Id Rating to Update) = " + id);
 
@@ -93,7 +90,6 @@ public class RatingController {
 
 	@GetMapping("/rating/delete/{id}")
 	public String deleteRating(@PathVariable("id") Integer id, Model model) {
-		// TODO: Find Rating by Id and delete the Rating, return to Rating list
 
 		logger.info("Entering Delete method for a Rating: Id Rating to delete= " + id);
 

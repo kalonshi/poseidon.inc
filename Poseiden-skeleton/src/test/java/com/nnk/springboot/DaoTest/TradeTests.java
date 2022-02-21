@@ -23,7 +23,7 @@ public class TradeTests {
 	@WithMockUser(value = "test")
 	@Test
 	public void tradeTest() {
-		Trade trade = new Trade("Trade Account", "Type",10d);
+		Trade trade = new Trade("Trade Account", "Type", 10d);
 
 		// Save
 		trade = tradeRepository.save(trade);
@@ -39,11 +39,11 @@ public class TradeTests {
 		Assert.assertNull(trade.getSide());
 		Assert.assertNull(trade.getSourceListId());
 		Assert.assertNull(trade.getStatus());
-		Assert.assertNull(trade.getDealType()); 
-		Assert.assertNull(trade.getBuyPrice()); 
-		Assert.assertNull(trade.getSellPrice()); 
-		 Assert.assertNull(trade.getSellQuantity()); 
-		Assert.assertNull(trade.getTrader()); 
+		Assert.assertNull(trade.getDealType());
+		Assert.assertNull(trade.getBuyPrice());
+		Assert.assertNull(trade.getSellPrice());
+		Assert.assertNull(trade.getSellQuantity());
+		Assert.assertNull(trade.getTrader());
 
 		// Update
 		trade.setAccount("Trade Account Update");

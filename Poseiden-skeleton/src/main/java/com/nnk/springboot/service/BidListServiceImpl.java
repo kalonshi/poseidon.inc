@@ -26,14 +26,13 @@ public class BidListServiceImpl implements BidListService {
 	@Override
 	public List<BidList> bidList() {
 		// Get the Bids List
-		
+
 		List<BidList> bidLists = bidListRepository.findAll();
 		return bidLists;
 	}
 
-	
 	/**
-	 * Delete a  bid
+	 * Delete a bid
 	 *
 	 * @param Integer id
 	 * @return boolean
@@ -57,7 +56,7 @@ public class BidListServiceImpl implements BidListService {
 
 	@Override
 	public BidList getBidList(Integer id) {
-		// Get a Bid  by id
+		// Get a Bid by id
 		BidList bidList = new BidList();
 		if (!id.equals(null)) {
 
@@ -72,7 +71,7 @@ public class BidListServiceImpl implements BidListService {
 
 	@Override
 	public BidList updateBidList(Integer id, BidList bid) {
-		// Update a bid 
+		// Update a bid
 		bid.setBidListId(id);
 		bidListRepository.save(bid);
 		return bid;
@@ -81,7 +80,7 @@ public class BidListServiceImpl implements BidListService {
 
 	@Override
 	public void addBid(BidList bid) {
-		// Add a bid with a automatic Date of creation 
+		// Add a bid with a automatic Date of creation
 		bid.setCreationDate(new Timestamp(System.currentTimeMillis()));
 		bidListRepository.save(bid);
 	}

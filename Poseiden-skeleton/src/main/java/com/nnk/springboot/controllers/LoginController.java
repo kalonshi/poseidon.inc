@@ -14,38 +14,36 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("app")
 public class LoginController {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    private static final Logger logger = LogManager.getLogger(LoginController.class);
+	private static final Logger logger = LogManager.getLogger(LoginController.class);
 
-    
-    
-    @GetMapping("login")
-    public ModelAndView login() {
-    	logger.info("Entering Login method");
-    	
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("login");
-        return mav;
-    }
+	@GetMapping("login")
+	public ModelAndView login() {
+		logger.info("Entering Login method");
 
-    @GetMapping("secure/article-details")
-    public ModelAndView getAllUserArticles() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("users", userRepository.findAll());
-        mav.setViewName("user/list");
-        return mav;
-    }
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		return mav;
+	}
 
-    @GetMapping("error")
-    public ModelAndView error() {
-    	logger.info("Entering error method ");
-    	 
-        ModelAndView mav = new ModelAndView();
-        String errorMessage= "You are not authorized for the requested data.";
-        mav.addObject("errorMsg", errorMessage);
-        mav.setViewName("403");
-        return mav;
-    }
+	@GetMapping("secure/article-details")
+	public ModelAndView getAllUserArticles() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("users", userRepository.findAll());
+		mav.setViewName("user/list");
+		return mav;
+	}
+
+	@GetMapping("error")
+	public ModelAndView error() {
+		logger.info("Entering error method ");
+
+		ModelAndView mav = new ModelAndView();
+		String errorMessage = "You are not authorized for the requested data.";
+		mav.addObject("errorMsg", errorMessage);
+		mav.setViewName("403");
+		return mav;
+	}
 }

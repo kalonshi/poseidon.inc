@@ -70,47 +70,46 @@ public class RuleControllerTests {
 	}
 
 	@WithMockUser(value = "test")
-@Test
+	@Test
 	public void testSaveRuleName() throws Exception {
 
 		RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
-
 		String jsonRequest = mapper.writeValueAsString(ruleName);
 		mvc.perform(post("/ruleName/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 
 	}
+
 	@WithMockUser(value = "test")
 	@Test
-		public void testFailSaveRuleName() throws Exception {
+	public void testFailSaveRuleName() throws Exception {
 
-			RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
-
-			String jsonRequest = mapper.writeValueAsString(ruleName);
-			mvc.perform(post("/ruleName/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
-					.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
-
-		}
-	@WithMockUser(value = "test")
-	  @Test public void testDeleteRule() throws Exception {
 		RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
+		String jsonRequest = mapper.writeValueAsString(ruleName);
+		mvc.perform(post("/ruleName/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
 
-		when(ruleNameRepository.findById(69)).thenReturn(Optional.of(ruleName));
-		doNothing().when(ruleNameRepository).delete(ruleName);; 
-	  mvc.perform(get("/ruleName/delete/69")) .andExpect(redirectedUrl("/ruleName/list")) ;
-	  }
+	}
+
 	@WithMockUser(value = "test")
+	@Test
+	public void testDeleteRule() throws Exception {
+		RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
+		when(ruleNameRepository.findById(69)).thenReturn(Optional.of(ruleName));
+		doNothing().when(ruleNameRepository).delete(ruleName);
+		;
+		mvc.perform(get("/ruleName/delete/69")).andExpect(redirectedUrl("/ruleName/list"));
+	}
 
+	@WithMockUser(value = "test")
 	@Test
 	public void testUpdateRuleName() throws Exception {
 		RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
-
 		when(ruleNameRepository.findById(69)).thenReturn(Optional.of(ruleName));
 		mvc.perform(get("/ruleName/update/69")).andExpect(status().isOk());
 	}
 
 	@WithMockUser(value = "test")
-
 	@Test
 	public void testSaveUpdateRuleName() throws Exception {
 		RuleName ruleName = new RuleName("name", " description", " json", "template", " sqlStr", " sqlPart");
@@ -118,8 +117,8 @@ public class RuleControllerTests {
 		ruleName.setName("descriptionUpdated");
 		mvc.perform(post("/ruleName/update/64")).andExpect(status().isOk());
 	}
-	@WithMockUser(value = "test")
 
+	@WithMockUser(value = "test")
 	@Test
 	public void testFailSaveUpdateRuleName() throws Exception {
 		RuleName ruleName = new RuleName();

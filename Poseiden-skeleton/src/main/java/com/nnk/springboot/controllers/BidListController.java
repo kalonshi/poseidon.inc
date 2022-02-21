@@ -1,10 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListService;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,28 +47,24 @@ public class BidListController {
 
 	@PostMapping("/bidList/validate")
 	public String validate(@Valid BidList bid, BindingResult result, Model model) {
-		// TODO: check data valid and save to db, after saving return bid list
 		logger.info("Entering validate method to save new Bid ");
-		// check data valid
-		/* boolean isNumber= false; */
+		
 		if (!result.hasErrors()) {
 			bidListService.addBid(bid);
 			model.addAttribute("bidLists", bidListRepository.findAll());
-
+			logger.info("Success save new Bid ");
+			
 			return "redirect:/bidList/list";
 		}
-		/*
-		 * isNumber=true; model.addAttribute("bidError", isNumber);
-		 */	
 		
+
 		return "bidList/add";
 	}
 
 	@GetMapping("/bidList/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		// TODO: get Bid by Id and to model then show to the form
-
-		logger.info("Entering Update()  method : Id Bid =" + id);
+		
+		logger.info("Entering showUpdateForm()  method : Id Bid =" + id);
 
 		BidList bidToUpdate = bidListRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid bid Id:" + id));
@@ -81,16 +75,18 @@ public class BidListController {
 
 	@PostMapping("/bidList/update/{id}")
 	public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
-		// TODO: check required fields, if valid call service to update Bid and return
-		// list Bid
+		
 		logger.info("Entering  Save Update() Bid method : Id Bid =" + id);
 
 		if (result.hasErrors()) {
+			logger.info("Fail  Save Update() Bid method : Id Bid =" + id);
 
 			return "bidList/update";
 		}
 
 		bidListService.updateBidList(id, bidList);
+		logger.info("Success  Save Update Bid : Id Bid =" + id);
+
 		model.addAttribute("bidLists", bidListService.bidList());
 
 		return "redirect:/bidList/list";
@@ -98,8 +94,7 @@ public class BidListController {
 
 	@GetMapping("/bidList/delete/{id}")
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
-		// TODO: Find Bid by Id and delete the bid, return to Bid list
-
+		
 		logger.info("Entering Delete() method for a Bid: Id Bid = " + id);
 		BidList bidListTodelede = bidListRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid bid Id:" + id));

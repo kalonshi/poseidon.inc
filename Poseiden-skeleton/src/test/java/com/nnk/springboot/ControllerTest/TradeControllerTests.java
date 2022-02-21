@@ -48,10 +48,6 @@ public class TradeControllerTests {
 	@Autowired
 	private ObjectMapper mapper;
 
-	/*
-	 * @Before public void setup() { mvc = MockMvcBuilders
-	 * .webAppContextSetup(context) .apply(springSecurity()).build(); }
-	 */
 	@Before()
 	public void setup() {
 		// Init MockMvc Object and build
@@ -75,29 +71,30 @@ public class TradeControllerTests {
 	public void testSaveTrade() throws Exception {
 
 		Trade trade = new Trade("account", "type");
-
 		String jsonRequest = mapper.writeValueAsString(trade);
 		mvc.perform(post("/trade/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
+
 	@WithMockUser(value = "test")
 	@Test
 	public void testFailSaveTradeEmptyData() throws Exception {
 
 		Trade trade = new Trade();
-
 		String jsonRequest = mapper.writeValueAsString(trade);
 		mvc.perform(post("/trade/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
 	}
-	
-	  @WithMockUser(value = "test")
-	  @Test public void testDeleteTrade() throws Exception {
-		  Trade trade =new Trade("account"," type");
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testDeleteTrade() throws Exception {
+		Trade trade = new Trade("account", " type");
 		when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
-		doNothing().when(tradeRepository).delete(trade); 
-	  mvc.perform(get("/trade/delete/69")) .andExpect(redirectedUrl("/trade/list")) ;
-	  }
+		doNothing().when(tradeRepository).delete(trade);
+		mvc.perform(get("/trade/delete/69")).andExpect(redirectedUrl("/trade/list"));
+	}
+
 	@WithMockUser(value = "test")
 	@Test
 	public void testUpdateTrade() throws Exception {
@@ -106,26 +103,24 @@ public class TradeControllerTests {
 		when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
 		mvc.perform(get("/trade/update/69")).andExpect(status().isOk());
 	}
-	
-	
-	  @WithMockUser(value = "test")
-	  
-	  @Test public void testWrongDataUpdateTrade() throws Exception {
-	  
-	  Trade trade = new Trade();
-	  when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
-	  mvc.perform(get("/trade/update/69")).andExpect(status().is(200)); }
-	  
-	 
-	  @WithMockUser(value = "test")
-	  
-	  @Test public void testSaveUpdateTrade() throws Exception {
-		  Trade trade = new Trade("account", " type"); 
-		  when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
-	  trade.setAccount("accountUpdated");
-	  mvc.perform(post("/trade/update/69")).andExpect(status().isOk());
-		
-	  }
-	 
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testWrongDataUpdateTrade() throws Exception {
+
+		Trade trade = new Trade();
+		when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
+		mvc.perform(get("/trade/update/69")).andExpect(status().is(200));
+	}
+
+	@WithMockUser(value = "test")
+	@Test
+	public void testSaveUpdateTrade() throws Exception {
+		Trade trade = new Trade("account", " type");
+		when(tradeRepository.findById(69)).thenReturn(Optional.of(trade));
+		trade.setAccount("accountUpdated");
+		mvc.perform(post("/trade/update/69")).andExpect(status().isOk());
+
+	}
 
 }

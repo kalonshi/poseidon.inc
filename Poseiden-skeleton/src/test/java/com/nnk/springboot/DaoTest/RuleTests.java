@@ -18,6 +18,7 @@ import java.util.Optional;
 public class RuleTests {
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
+
 	@WithMockUser(value = "test")
 	@Test
 	public void ruleTest() {
@@ -39,7 +40,7 @@ public class RuleTests {
 		rule.setSqlPart("sqlPart");
 		rule.setSqlStr("sqlStr");
 		rule.setTemplate("template");
-		
+
 		rule = ruleNameRepository.save(rule);
 		Assert.assertTrue(rule.getName().equals("Rule Name Update"));
 		Assert.assertTrue(rule.getDescription().equals("description"));
@@ -47,7 +48,7 @@ public class RuleTests {
 		Assert.assertTrue(rule.getSqlStr().equals("sqlStr"));
 		Assert.assertTrue(rule.getTemplate().equals("template"));
 		Assert.assertTrue(rule.getJson().equals("json"));
-		
+
 		// Find
 		List<RuleName> listResult = ruleNameRepository.findAll();
 		Assert.assertTrue(listResult.size() > 0);

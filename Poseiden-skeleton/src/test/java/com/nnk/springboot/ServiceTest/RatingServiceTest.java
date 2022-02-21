@@ -22,7 +22,7 @@ public class RatingServiceTest {
 	private RatingRepository ratingRepository;
 	@Autowired
 	private RatingSercive ratingService;
-	
+
 	@WithMockUser(value = "test")
 	@Test
 	public void ratingServiceTest() {
@@ -34,22 +34,22 @@ public class RatingServiceTest {
 		Assert.assertTrue(rating.getOrderNumber() == 10);
 
 		// Update
-		 Integer id = rating.getId();
-		 ratingService.getRating(id);
-		  rating.setOrderNumber(20); 
-		  ratingService.updateRating(id, rating);
-		  Assert.assertTrue(rating.getOrderNumber() == 20);
-		 
+		Integer id = rating.getId();
+		ratingService.getRating(id);
+		rating.setOrderNumber(20);
+		ratingService.updateRating(id, rating);
+		Assert.assertTrue(rating.getOrderNumber() == 20);
 
 		// Find
 		List<Rating> listResult = ratingService.ratingList();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
-		
-		  Integer id2 = rating.getId(); ratingService.deleteRating(id2); Optional<Rating>
-		  ratingList = ratingRepository.findById(id);
-		  Assert.assertFalse(ratingList.isPresent());
-		 
+
+		Integer id2 = rating.getId();
+		ratingService.deleteRating(id2);
+		Optional<Rating> ratingList = ratingRepository.findById(id);
+		Assert.assertFalse(ratingList.isPresent());
+
 	}
 }

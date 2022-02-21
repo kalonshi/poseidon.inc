@@ -42,7 +42,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- TODO: Show all RuleName to the table, the Action column will have Edit & Delete buttons -->
 					<tr th:each="ruleName:${ruleNames}">
 						<td style="width: 10%"
 							th:text="${ruleName.id}?:'(non renseigner)'"></td>
@@ -60,8 +59,6 @@
 						</a></td>
 
 					</tr>
-
-
 				</tbody>
 			</table>
 		</div>

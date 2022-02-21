@@ -32,7 +32,7 @@ public class RuleNameController {
 
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
-		// TODO: find all RuleName, add to model
+
 		logger.info("Entering home() method for ruleName: List of RuleNames");
 		List<RuleName> ruleNames = ruleService.ruleNameList();
 		model.addAttribute("ruleNames", ruleNames);
@@ -47,11 +47,9 @@ public class RuleNameController {
 
 	@PostMapping("/ruleName/validate")
 	public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-		// TODO: check data valid and save to db, after saving return RuleName list
+
 		logger.info("Entering validate new Rulename method ");
-		if (!result.hasErrors() && !ruleName.getJson().isEmpty() && !ruleName.getName().isEmpty()
-				&& !ruleName.getSqlPart().isEmpty() && !ruleName.getTemplate().isEmpty()
-				&& !ruleName.getSqlStr().isEmpty() && !ruleName.getDescription().isEmpty()) {
+		if (!result.hasErrors()) {
 			ruleService.addRuleName(ruleName);
 			model.addAttribute("ruleNames", ruleNameRepository.findAll());
 			return "redirect:/ruleName/list";
@@ -61,8 +59,8 @@ public class RuleNameController {
 
 	@GetMapping("/ruleName/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		// TODO: get RuleName by Id and to model then show to the form
-		logger.info("Entering Update Rulename method : Id ruleName to Update= " + id);
+
+		logger.info("Entering showUpdateForm method : Id ruleName to Update= " + id);
 		RuleName ruleName = ruleNameRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
 
@@ -73,15 +71,18 @@ public class RuleNameController {
 	@PostMapping("/ruleName/update/{id}")
 	public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName, BindingResult result,
 			Model model) {
-		// TODO: check required fields, if valid call service to update RuleName and
+
 		logger.info("Entering save Update Rulename method : Id ruleName to Update= " + id);
 
 		if (result.hasErrors()) {
+			logger.info("Fail Update Rulename method : Id ruleName to Update= " + id);
 
 			return "ruleName/update";
 		}
 
 		ruleService.updateRuleName(id, ruleName);
+		logger.info("Success Update Rulename method : Id ruleName to Update= " + id);
+
 		model.addAttribute("ruleNames", ruleService.ruleNameList());
 
 		return "redirect:/ruleName/list";
@@ -89,7 +90,6 @@ public class RuleNameController {
 
 	@GetMapping("/ruleName/delete/{id}")
 	public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-		// TODO: Find RuleName by Id and delete the RuleName, return to Rule list
 
 		logger.info("Entering Delete method for a RuleName: Id RuleName to delete= " + id);
 

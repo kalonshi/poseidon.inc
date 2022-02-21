@@ -52,10 +52,6 @@ public class BidControllerTest {
 	@Autowired
 	private ObjectMapper mapper;
 
-	/*
-	 * @Before public void setup() { mvc = MockMvcBuilders
-	 * .webAppContextSetup(context) .apply(springSecurity()).build(); }
-	 */
 	@Before()
 	public void setup() {
 		// Init MockMvc Object and build
@@ -63,7 +59,6 @@ public class BidControllerTest {
 	}
 
 	@WithMockUser(value = "test")
-
 	@Test
 	public void testShowWatchBidList() throws Exception {
 		mvc.perform(get("/bidList/list")).andExpect(status().is2xxSuccessful());
@@ -82,7 +77,6 @@ public class BidControllerTest {
 		String jsonRequest = mapper.writeValueAsString(bid);
 		mvc.perform(post("/bidList/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-
 	}
 
 	@WithMockUser(value = "test")
@@ -92,11 +86,9 @@ public class BidControllerTest {
 		String jsonRequest = mapper.writeValueAsString(bid);
 		mvc.perform(post("/bidList/validate").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().is(200));
-
 	}
 
 	@WithMockUser(value = "test")
-
 	@Test
 	public void testUpdateBid() throws Exception {
 		BidList bid = new BidList("test", "test", 10d);
@@ -111,9 +103,8 @@ public class BidControllerTest {
 		when(bidListRepository.findById(69)).thenReturn(Optional.of(bid));
 		bid.setAskQuantity(20d);
 		mvc.perform(post("/bidList/update/69")).andExpect(status().isOk());
-		
-		
 	}
+
 	@WithMockUser(value = "test")
 	@Test
 	public void testFailSaveUpdateBid() throws Exception {
@@ -121,15 +112,15 @@ public class BidControllerTest {
 		when(bidListRepository.findById(69)).thenReturn(Optional.of(bid));
 		bid.setAskQuantity(20d);
 		mvc.perform(post("/bidList/update/69")).andExpect(status().is(200));
-		
-		
 	}
 
 	@WithMockUser(value = "test")
-	  @Test public void testDeleteCurvePoint() throws Exception {
+	@Test
+	public void testDeleteCurvePoint() throws Exception {
 		BidList bid = new BidList("test", "test", 10d);
 		when(bidListRepository.findById(69)).thenReturn(Optional.of(bid));
-		doNothing().when(bidListRepository).delete(bid);; 
-	  mvc.perform(get("/bidList/delete/69")) .andExpect(redirectedUrl("/bidList/list")) ;
-	  }
+		doNothing().when(bidListRepository).delete(bid);
+		;
+		mvc.perform(get("/bidList/delete/69")).andExpect(redirectedUrl("/bidList/list"));
+	}
 }

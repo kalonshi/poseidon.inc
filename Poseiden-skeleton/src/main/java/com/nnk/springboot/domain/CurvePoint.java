@@ -1,32 +1,36 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "curvepoint")
 public class CurvePoint {
-	// TODO: Map columns in data table CURVEPOINT with corresponding java fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@NotNull(message = "CurveId  is mandatory") 
+	
 	@Column(name = "curveId")
+	@NotNull(message = "CurveId  is mandatory")
 	private Integer curveId;
+	
 	@Column(name = "asOfDate")
 	private Timestamp asOfDate;
-	@NotNull(message = "term  is mandatory") 
-	@Min(value = 1, message = "term is mandatory")
-	private Double term;
-	@NotNull(message = "value  is mandatory") 
-	@Min(value = 1, message = "value is mandatory")
 	
+	@NotNull(message = "term  is mandatory")
+	private Double term;
+	
+	@NotNull(message = "value  is mandatory")
+	@Min(value = 0, message = "number is required")
 	private Double value;
+	
 	@Column(name = "creationDate")
 	private Timestamp creationDate;
 

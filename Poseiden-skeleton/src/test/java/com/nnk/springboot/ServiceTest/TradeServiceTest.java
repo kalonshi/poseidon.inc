@@ -22,10 +22,11 @@ public class TradeServiceTest {
 	private TradeRepository tradeRepository;
 	@Autowired
 	private TradeService tradeService;
+
 	@WithMockUser(value = "test")
 	@Test
 	public void tradeServiceTest() {
-		Trade trade = new Trade("Trade Account", "Type",10d);
+		Trade trade = new Trade("Trade Account", "Type", 10d);
 
 		// Save
 		tradeService.addTrade(trade);
@@ -44,14 +45,11 @@ public class TradeServiceTest {
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
-		
-		  
-				  trade=tradeService.getTrade(id)	  ; 
-		  
-				  tradeService.deleteTrade(id);
-		/* tradeRepository.delete(trade); */
-		  Optional<Trade> tradeList = tradeRepository.findById(id);
-		  Assert.assertFalse(tradeList.isPresent());
-		 
+
+		trade = tradeService.getTrade(id);
+		tradeService.deleteTrade(id);
+		Optional<Trade> tradeList = tradeRepository.findById(id);
+		Assert.assertFalse(tradeList.isPresent());
+
 	}
 }

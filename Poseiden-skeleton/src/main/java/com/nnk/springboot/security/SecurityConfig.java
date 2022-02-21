@@ -1,7 +1,5 @@
 package com.nnk.springboot.security;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,27 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.formLogin();
-		/* http.csrf().disable(); */
-		/* http.csrf(); */
-		http.authorizeRequests()
-		.antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**").hasAnyAuthority("ADMIN", "USER")
-		.antMatchers("/admin/**").hasAuthority("ADMIN")
-		.antMatchers("/user/**").hasAuthority("USER")
-		.anyRequest().authenticated() // All request have to be authenticated
-		.and()
-		.formLogin() // access login form
-		.defaultSuccessUrl("/bidList/list")  
-		.and()
-		.logout() // logout
-		.logoutUrl("/app-logout")
-		.logoutSuccessUrl("/");
+
+		http.authorizeRequests().antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**")
+				.hasAnyAuthority("ADMIN", "USER").antMatchers("/admin/**").hasAuthority("ADMIN").antMatchers("/user/**")
+				.hasAuthority("USER").anyRequest().authenticated() // All request have to be authenticated
+				.and().formLogin() // access login form
+				.defaultSuccessUrl("/bidList/list").and().logout() // logout
+				.logoutUrl("/app-logout").logoutSuccessUrl("/");
 
 		http.exceptionHandling().accessDeniedPage("/app/error");// page for deny access
 
 	}
 
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() { // TODO Auto-generated method stub
+	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
