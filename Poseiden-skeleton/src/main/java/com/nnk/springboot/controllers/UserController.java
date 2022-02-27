@@ -45,18 +45,21 @@ public class UserController {
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
     	logger.info("Entering  validate method to save  new User ");
-    	if (!result.hasErrors()) {
-        	String password=user.getPassword();
-        	if(checkInputService.checkPassword(password)) {
+    	if (!result.hasErrors()&&checkInputService.checkPassword(user.getPassword())) {
+        	/*String password=user.getPassword();
+        	if(checkInputService.checkPassword(password)) {*/
         		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 user.setPassword(encoder.encode(user.getPassword()));
                 user.setActive(true);
                 userRepository.save(user);
                 model.addAttribute("users", userRepository.findAll());
                 return "redirect:/user/list";
-        	}
+			/* } */
             
         }
+    	if(!checkInputService.checkPassword(user.getPassword())) {
+    	 model.addAttribute("wrongPassword", true);
+    	}
         return "user/add";
     }
 

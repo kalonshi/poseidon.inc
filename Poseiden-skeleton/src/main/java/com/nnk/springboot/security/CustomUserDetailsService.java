@@ -25,8 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found");
 		}
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-		UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(
-				user.getUsername(), user.getPassword(), Arrays.asList(authority));
-		return userDetails;
+		  UserDetails userDetails = (UserDetails)new org.springframework.security.core.userdetails.User(user.getUsername(),
+	                user.getPassword(), Arrays.asList(authority));
+		  return userDetails;
 	}
 }

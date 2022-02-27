@@ -17,7 +17,7 @@
 			</div>
 			<div class="col-6 text-right">
 				Logged in user: <b th:inline="text" class="user">
-					[[${#httpServletRequest.remoteUser}]] </b>
+					[[${#request.userPrincipal.name}]] </b>
 				<form th:action="@{/login?logout}" method="POST">
 					<input type="submit" value="Logout" />
 				</form>
@@ -40,7 +40,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- TODO: Show all Rating to the table, the Action column will have Edit & Delete buttons -->
 					<tr th:each="rating:${ratings}">
 						<td style="width: 10%" th:text="${rating.id}?:'(non renseigner)'"></td>
 						<td th:text="${rating.moodysRating}?:'(non renseigner)'"></td>

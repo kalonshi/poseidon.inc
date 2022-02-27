@@ -28,7 +28,6 @@ public class CurvePoint {
 	private Double term;
 	
 	@NotNull(message = "value  is mandatory")
-	@Min(value = 0, message = "number is required")
 	private Double value;
 	
 	@Column(name = "creationDate")

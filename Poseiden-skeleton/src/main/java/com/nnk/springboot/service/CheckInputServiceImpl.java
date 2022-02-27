@@ -25,10 +25,10 @@ public class CheckInputServiceImpl implements CheckInputService {
 		return matcher.matches();
 	}
 
-	@Override
-	public boolean checkInputIsNumber(String inputNumber) {
-		Matcher matcherpattern = patternNumber.matcher(inputNumber);
-		return matcherpattern.matches();
-	}
+	/*
+	 * @Override public boolean checkInputIsNumber(String inputNumber) { Matcher
+	 * matcherpattern = patternNumber.matcher(inputNumber); return
+	 * matcherpattern.matches(); }
+	 */
 
 }

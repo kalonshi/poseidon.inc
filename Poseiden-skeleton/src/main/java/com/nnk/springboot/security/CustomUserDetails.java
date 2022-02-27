@@ -1,8 +1,10 @@
 package com.nnk.springboot.security;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,9 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+		
+		return Arrays.asList(authority);
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class BidListController {
 	public String validate(@Valid BidList bid, BindingResult result, Model model) {
 		logger.info("Entering validate method to save new Bid ");
 		
-		if (!result.hasErrors()) {
+		if (!result.hasErrors()) { 
 			bidListService.addBid(bid);
 			model.addAttribute("bidLists", bidListRepository.findAll());
 			logger.info("Success save new Bid ");
