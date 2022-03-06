@@ -14,8 +14,6 @@ public class CustomOAuth2User implements OAuth2User {
 		this.oauth2User = user;
 	}
 
-	
-
 	@Override
 	public Map<String, Object> getAttributes() {
 		return oauth2User.getAttributes();
@@ -28,10 +26,8 @@ public class CustomOAuth2User implements OAuth2User {
 
 	@Override
 	public String getName() {
-		Map<String, Object> attributs= getAttributes();
-		
-		String pseudo=(String) attributs.get("login");
-		
+		Map<String, Object> attributs = getAttributes();
+		String pseudo = (String) attributs.get("login");
 		return pseudo;
 	}
 }

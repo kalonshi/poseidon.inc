@@ -46,15 +46,15 @@ public class TradeController {
 
 	@PostMapping("/trade/validate")
 	public String validate(@Valid Trade trade, BindingResult result, Model model) {
-		// TODO: check data valid and save to db, after saving return Trade list
+
 		logger.info("Entering save  new Trade method ");
 		if (!result.hasErrors()) {
 			tradeService.addTrade(trade);
-
+			logger.info("Success to add a new Trade  ");
 			model.addAttribute("trades", tradeService.tradeList());
 			return "redirect:/trade/list";
 		}
-		logger.info("Fail to add a new Trade method ");
+		logger.info("Fail to add a new Trade  ");
 		return "trade/add";
 	}
 

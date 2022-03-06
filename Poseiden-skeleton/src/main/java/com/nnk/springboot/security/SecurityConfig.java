@@ -42,47 +42,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		.antMatchers("/", "/login")
-		.permitAll().anyRequest().authenticated()
-		.and().formLogin().permitAll()
-		.and().logout().logoutUrl("/app-logout").logoutSuccessUrl("/")
-		.and().oauth2Login().userInfoEndpoint().userService(userService);
-		
-		/* http.formLogin(); */
-		/*
-		 * http.authorizeRequests() .antMatchers("/admin/**").hasAuthority("ADMIN")
-		 * .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER","ROLE_USER")
-		 * .anyRequest().authenticated() // All request have to be authenticated
-		 * .and().formLogin() // access login form .defaultSuccessUrl("/bidList/list")
-		 * .and().logout() // logout .logoutUrl("/app-logout").logoutSuccessUrl("/")
-		 * .and().oauth2Login().defaultSuccessUrl("/trade/list").userInfoEndpoint().
-		 * userService(userService);
-		 * 
-		 * http.exceptionHandling().accessDeniedPage("/app/error");// page for deny
-		 * access
-		 * 
-		 */
+		.antMatchers("/admin/**").hasAuthority("ADMIN")
+		.antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER", "ROLE_USER")
+		.anyRequest().authenticated() // All request have to be authenticate														// authenticated
+				.and().formLogin() // UserName_Password session Access
+				.defaultSuccessUrl("/bidList/list").and().logout() // logout
+				.logoutUrl("/app-logout").logoutSuccessUrl("/")
+				.and().oauth2Login() // Token Access
+				.defaultSuccessUrl("/trade/list").userInfoEndpoint().userService(userService);
+
+		http.exceptionHandling().accessDeniedPage("/app/error");// page for deny access
+
 	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	/*
-	 * @Bean public ClientRegistrationRepository clientRegistrationRepository() {
-	 * List<ClientRegistration> registrations = new ArrayList<>();
-	 * registrations.add(githubClientRegistration());
-	 * 
-	 * return new InMemoryClientRegistrationRepository(registrations); }
-	 * 
-	 * private ClientRegistration githubClientRegistration() { return
-	 * ClientRegistration.withRegistrationId("github") .clientId("github-client-id")
-	 * .clientSecret("github-client-secret")
-	 * .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-	 * .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-	 * .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
-	 * .authorizationUri("https://github.com/login/oauth/authorize")
-	 * .tokenUri("https://github.com/login/oauth/access_token")
-	 * .userInfoUri("https://api.github.com/user") .clientName("GitHub").build(); }
-	 */
+
 }

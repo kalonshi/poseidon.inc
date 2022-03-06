@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @Controller
 public class RatingController {
-	// TODO: Inject Rating service
+
 	@Autowired
 	private RatingSercive ratingService;
 	@Autowired

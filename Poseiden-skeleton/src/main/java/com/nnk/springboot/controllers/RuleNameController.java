@@ -1,10 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import com.nnk.springboot.service.RuleNameService;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 @Controller
@@ -51,9 +48,11 @@ public class RuleNameController {
 		logger.info("Entering validate new Rulename method ");
 		if (!result.hasErrors()) {
 			ruleService.addRuleName(ruleName);
+			logger.info("Success add a new Rulename  ");
 			model.addAttribute("ruleNames", ruleNameRepository.findAll());
 			return "redirect:/ruleName/list";
 		}
+		logger.info("Fail to add a new Rulename  ");
 		return "ruleName/add";
 	}
 

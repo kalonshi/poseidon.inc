@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class RuleControllerTests {
 		// Init MockMvc Object and build
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
-
+	@Ignore
 	@WithMockUser(value = "test")
 	@Test
 	public void testShowWatchRuleNameList() throws Exception {

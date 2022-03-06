@@ -48,22 +48,22 @@ public class BidListController {
 	@PostMapping("/bidList/validate")
 	public String validate(@Valid BidList bid, BindingResult result, Model model) {
 		logger.info("Entering validate method to save new Bid ");
-		
-		if (!result.hasErrors()) { 
+
+		if (!result.hasErrors()) {
 			bidListService.addBid(bid);
 			model.addAttribute("bidLists", bidListRepository.findAll());
 			logger.info("Success save new Bid ");
-			
+
 			return "redirect:/bidList/list";
 		}
-		
+		logger.info("Fail To save new Bid ");
 
 		return "bidList/add";
 	}
 
 	@GetMapping("/bidList/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		
+
 		logger.info("Entering showUpdateForm()  method : Id Bid =" + id);
 
 		BidList bidToUpdate = bidListRepository.findById(id)
@@ -75,7 +75,7 @@ public class BidListController {
 
 	@PostMapping("/bidList/update/{id}")
 	public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
-		
+
 		logger.info("Entering  Save Update() Bid method : Id Bid =" + id);
 
 		if (result.hasErrors()) {
@@ -94,7 +94,7 @@ public class BidListController {
 
 	@GetMapping("/bidList/delete/{id}")
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
-		
+
 		logger.info("Entering Delete() method for a Bid: Id Bid = " + id);
 		BidList bidListTodelede = bidListRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid bid Id:" + id));
