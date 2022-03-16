@@ -35,14 +35,12 @@ public class RatingServiceImpl implements RatingSercive {
 
 		// Delete a rating by id
 		Boolean isDeleted = false;
-		if (!id.equals(null)) {
-			try {
+		if (id!=null) {
+			
 				Rating rating = ratingRepository.getOne(id);
 				ratingRepository.delete(rating);
 				isDeleted = true;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			
 		}
 
 		return isDeleted;
@@ -53,13 +51,11 @@ public class RatingServiceImpl implements RatingSercive {
 
 		// Get a rating by id
 		Rating rating = new Rating();
-		if (!id.equals(null)) {
+		if (id!=null) {
 
-			try {
+			
 				rating = ratingRepository.getOne(id);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			
 		}
 		return rating;
 	}

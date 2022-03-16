@@ -32,7 +32,7 @@ public class BidListController {
 
 		logger.info("Entering home() method: List of bids ");
 
-		List<BidList> bidLists = bidListService.bidList();
+		List<BidList> bidLists = bidListService.getAllbids();
 		model.addAttribute("bidLists", bidLists);
 		return "bidList/list";
 	}
@@ -87,7 +87,7 @@ public class BidListController {
 		bidListService.updateBidList(id, bidList);
 		logger.info("Success  Save Update Bid : Id Bid =" + id);
 
-		model.addAttribute("bidLists", bidListService.bidList());
+		model.addAttribute("bidLists", bidListService.getAllbids());
 
 		return "redirect:/bidList/list";
 	}

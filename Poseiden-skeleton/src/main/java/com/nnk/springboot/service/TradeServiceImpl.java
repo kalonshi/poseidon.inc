@@ -27,7 +27,7 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public Trade addTrade(Trade trade) {
 
-		if (!trade.equals(null)) {
+		if (trade!=null) {
 			trade.setCreationDate(new Timestamp(System.currentTimeMillis()));
 			tradeRepository.save(trade);
 		}

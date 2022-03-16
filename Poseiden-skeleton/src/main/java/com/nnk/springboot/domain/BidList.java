@@ -75,7 +75,7 @@ public class BidList {
 	@Column(name = "dealType", length = 125)
 	private String dealType;
 	
-	@Column(name = "sourceL", length = 125)
+	@Column(name = "sourceListId", length = 125)
 	private String sourceL;
 	
 	@Column(length = 125)

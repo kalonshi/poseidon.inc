@@ -41,14 +41,12 @@ public class RuleNameServiceImpl implements RuleNameService {
 		// Delete rule by id
 
 		Boolean isDeleted = false;
-		if (!id.equals(null)) {
-			try {
+		if (id!=null) {
+			
 				RuleName ruleName = ruleNameRepository.getOne(id);
 				ruleNameRepository.delete(ruleName);
 				isDeleted = true;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			
 		}
 
 		return isDeleted;

@@ -35,7 +35,7 @@ public class BidServiceTests {
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
 
 		// Find
-		List<BidList> listResult = bidListService.bidList();
+		List<BidList> listResult = bidListService.getAllbids();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Update

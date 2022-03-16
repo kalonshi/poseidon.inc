@@ -6,12 +6,12 @@ import com.nnk.springboot.domain.BidList;
 
 public interface BidListService {
 	/**
-	 *  Add a new Bid
-	 *  
-	 * @param BidList
-	 * @return BidList
+	 * Return  all bids
+	 *
+	 * @param none
+	 * @return List<BidList>
 	 */
-	public List<BidList> bidList();
+	public List<BidList> getAllbids();
 	
 	/**
 	 *  Add a new Bid

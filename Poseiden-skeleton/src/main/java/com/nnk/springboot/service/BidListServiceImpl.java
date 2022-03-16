@@ -24,7 +24,7 @@ public class BidListServiceImpl implements BidListService {
 	 * @return List<BidList>
 	 */
 	@Override
-	public List<BidList> bidList() {
+	public List<BidList> getAllbids() {
 		// Get the Bids List
 
 		List<BidList> bidLists = bidListRepository.findAll();
@@ -41,14 +41,12 @@ public class BidListServiceImpl implements BidListService {
 	public boolean deleteBid(Integer id) {
 		// Delete a Bid by id
 		Boolean isDeleted = false;
-		if (!id.equals(null)) {
-			try {
+		if (id!=null) {
+			
 				BidList bidList = bidListRepository.getOne(id);
 				bidListRepository.delete(bidList);
 				isDeleted = true;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			
 		}
 
 		return isDeleted;
@@ -58,13 +56,9 @@ public class BidListServiceImpl implements BidListService {
 	public BidList getBidList(Integer id) {
 		// Get a Bid by id
 		BidList bidList = new BidList();
-		if (!id.equals(null)) {
 
-			try {
-				bidList = bidListRepository.getOne(id);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		if (id != null) {
+			bidList = bidListRepository.getOne(id);
 		}
 		return bidList;
 	}

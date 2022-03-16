@@ -22,7 +22,7 @@ public class CurvePointServiceImpl implements CurvePointService {
 	public CurvePoint getCurvePointById(Integer id) {
 		 // Get a curvePoint  by id
 		CurvePoint curvePoint = new CurvePoint();
-		if (!id.equals(null)) {
+		if (id!=null) {
 
 			try {
 				curvePoint = curvePointRepository.findByCurveId(id);
